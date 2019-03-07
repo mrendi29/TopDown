@@ -12,7 +12,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Pane root = new Pane();
-			Scene scene = new Scene(root,800,800);
+			Scene scene = new Scene(root,1440,900);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
