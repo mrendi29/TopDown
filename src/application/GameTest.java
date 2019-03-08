@@ -29,7 +29,7 @@ public void start(Stage primaryStage) throws Exception {
 		
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Player p = new Player();
+		Player p = new Player(windowSizeX/2, windowSizeY/2, 20);
 		Text healthNode = new Text(50,windowSizeY - 100,"Lives: "+Integer.toString(p.getLives()));
 		healthNode.setFont(new 	Font(20));
 		
@@ -50,16 +50,28 @@ public void start(Stage primaryStage) throws Exception {
 			{   
 				System.exit(0);
 			}
-			if(e.getCode() == KeyCode.SPACE)
-			{
-				//creates a new bullet
-				Bullet b = p.shoot(p.getX() + 200, p.getY() + 150, p.getY() - 50);
-				
-				shotFired = true;
-				
-				//adds bullet to pane
-				root.getChildren().add(b.getGraphic());
-				
+			if(e.getCode()==KeyCode.SPACE)	
+			{   
+				if(p.isFacing().equals("up"))
+				{
+					p.shoot(p.getX(), p.getY(), 10);
+
+				}
+				if(p.isFacing().equals("down"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
+				if(p.isFacing().equals("left"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
+				if(p.isFacing().equals("right"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
 			}
 			if(e.getCode() == KeyCode.UP)
 			{
@@ -83,10 +95,9 @@ public void start(Stage primaryStage) throws Exception {
 			@Override
 			public void run() {
 				
-				Platform.runLater(()->p.move());
-				//Platform.runLater(()->b.move());
-
-
+				//Platform.runLater(()->p.move());
+				
+	
 			}
 		},500,60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
