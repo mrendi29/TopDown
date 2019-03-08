@@ -1,3 +1,5 @@
+//Wit topdown shooter project
+
 package application;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,7 +25,7 @@ boolean shotFired = false;
 public void start(Stage primaryStage) throws Exception {
 	
 		int windowSizeX = 1920;
-		int windowSizeY = 1080;
+		int windowSizeY = 1015;
 		
 		
 		
@@ -50,7 +52,7 @@ public void start(Stage primaryStage) throws Exception {
 			{   
 				System.exit(0);
 			}
-			if(e.getCode()==KeyCode.SPACE)	
+			/*if(e.getCode()==KeyCode.SPACE)	
 			{   
 				if(p.isFacing().equals("up"))
 				{
@@ -72,7 +74,7 @@ public void start(Stage primaryStage) throws Exception {
 					//p.shoot(startx, starty, length);
 
 				}
-			}
+			}*/
 			if(e.getCode() == KeyCode.UP)
 			{
 				p.moveForward();
