@@ -8,6 +8,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -28,8 +30,10 @@ public void start(Stage primaryStage) throws Exception {
 		Timer t = new Timer();
 		Pane root = new Pane();
 		Player p = new Player();
+		Text healthNode = new Text(50,windowSizeY - 100,"Lives: "+Integer.toString(p.getLives()));
+		healthNode.setFont(new 	Font(20));
 		
-		root.getChildren().add(p.getGraphic());
+		root.getChildren().addAll(p.getGraphic(), healthNode);
 		
 		
 		Scene s = new Scene(root ,windowSizeX, windowSizeY);
@@ -49,11 +53,9 @@ public void start(Stage primaryStage) throws Exception {
 			if(e.getCode() == KeyCode.SPACE)
 			{
 				//creates a new bullet
-				Bullet b = p.shoot(p.getX(), p.getY(), p.getY());
+				Bullet b = p.shoot(p.getX() + 200, p.getY() + 150, p.getY() - 50);
 				
-				
-				
-				
+				shotFired = true;
 				
 				//adds bullet to pane
 				root.getChildren().add(b.getGraphic());
@@ -82,9 +84,11 @@ public void start(Stage primaryStage) throws Exception {
 			public void run() {
 				
 				Platform.runLater(()->p.move());
+				//Platform.runLater(()->b.move());
+
 
 			}
-		},100,30);
+		},500,60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
 			@Override

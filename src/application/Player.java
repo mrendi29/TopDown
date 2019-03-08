@@ -14,6 +14,9 @@ public class Player {
 	private double dt;
 	private double maxX;
 	private double maxY;
+	private boolean alive;
+	
+	private int lives;
 	private String isFacing = "up";
 	
 	
@@ -26,7 +29,10 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
+		alive = true;
 		node = new Circle(x,y,radius);
+		
+		lives = 3;
 		
 		vx = 400; //pix/sec
 		vy = 150; //pic/sec
@@ -74,6 +80,19 @@ public class Player {
 		isFacing = "right";
 
 		
+	}
+	public boolean injure()
+	{
+		lives--;
+		if(lives == 0)
+		{
+			alive = false;
+		}
+		return alive;
+	}
+	public int getLives()
+	{
+		return lives;
 	}
 	public Bullet shoot(double startx, double starty, double length)
 	{
