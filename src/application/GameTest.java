@@ -1,3 +1,5 @@
+//Wit topdown shooter project
+
 package application;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -21,15 +25,17 @@ boolean shotFired = false;
 public void start(Stage primaryStage) throws Exception {
 	
 		int windowSizeX = 1920;
-		int windowSizeY = 1080;
+		int windowSizeY = 1015;
 		
 		
 		
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Player p = new Player();
+		Player p = new Player(windowSizeX/2, windowSizeY/2, 20);
+		Text healthNode = new Text(50,windowSizeY - 100,"Lives: "+Integer.toString(p.getLives()));
+		healthNode.setFont(new 	Font(20));
 		
-		root.getChildren().add(p.getGraphic());
+		root.getChildren().addAll(p.getGraphic(), healthNode);
 		
 		
 		Scene s = new Scene(root ,windowSizeX, windowSizeY);
@@ -46,19 +52,29 @@ public void start(Stage primaryStage) throws Exception {
 			{   
 				System.exit(0);
 			}
-			if(e.getCode() == KeyCode.SPACE)
-			{
-				//creates a new bullet
-				Bullet b = p.shoot(p.getX(), p.getY(), p.getY());
-				
-				
-				
-				
-				
-				//adds bullet to pane
-				root.getChildren().add(b.getGraphic());
-				
-			}
+			/*if(e.getCode()==KeyCode.SPACE)	
+			{   
+				if(p.isFacing().equals("up"))
+				{
+					p.shoot(p.getX(), p.getY(), 10);
+
+				}
+				if(p.isFacing().equals("down"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
+				if(p.isFacing().equals("left"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
+				if(p.isFacing().equals("right"))
+				{
+					//p.shoot(startx, starty, length);
+
+				}
+			}*/
 			if(e.getCode() == KeyCode.UP)
 			{
 				p.moveForward();
@@ -81,10 +97,11 @@ public void start(Stage primaryStage) throws Exception {
 			@Override
 			public void run() {
 				
-				Platform.runLater(()->p.move());
-
+				//Platform.runLater(()->p.move());
+				
+	
 			}
-		},100,30);
+		},500,60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
 			@Override
