@@ -94,17 +94,33 @@ public void start(Stage primaryStage) throws Exception {
 //			}
 			
 			if (e.getCode() == KeyCode.R) {
-				Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
-				bullets.add(bullet);
-				root.getChildren().add(bullet.getGraphic());
+				//Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
+				//bullets.add(bullet);
+				//root.getChildren().add(bullet.getGraphic());
 				
 				p.setColor();
 				
-				bullet.setBoundary(windowSizeX, windowSizeY);
+				//bullet.setBoundary(windowSizeX, windowSizeY);
 				
 			}
 		});
 		
+		
+		root.setOnMouseClicked(e-> {
+			
+			double xPosition= e.getSceneX();
+			double yPosition= e.getSceneY();
+			
+			Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5, xPosition, yPosition);
+			bullets.add(bullet);
+			
+			root.getChildren().add(bullet.getGraphic());
+			bullet.setBoundary(windowSizeX, windowSizeY);
+			
+		    System.out.println(e.getScreenX());
+		    System.out.println(e.getScreenY());
+			
+		});
 		t.scheduleAtFixedRate(new TimerTask(){
 			@Override
 			public void run() {
@@ -112,6 +128,10 @@ public void start(Stage primaryStage) throws Exception {
 				Platform.runLater(()->p.move());
 				for (int i=0; i<bullets.size();++i) {
 					bullets.get(i).move();
+					
+					if(bullets.get(i).getOutOfBounds()) {
+						root.getChildren().remove(bullets.get(i));
+					}
 					
 				}
 				

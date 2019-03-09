@@ -14,16 +14,18 @@ public class Bullet {
 	private double radius;
 	private double maxX;
 	private double maxY;
-	public Bullet(double x, double y,double radius)
+	private boolean outOfBounds;
+	public Bullet(double x, double y,double radius,double vx,double vy)
 	{
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
 		
 		node = new Circle(x, y, radius );
-		vx=-250;   //pix/sec
-		vy=-147;
-		dt=0.06;
+		
+		this.vx= vx-x;
+		this.vy = vy-y;
+		dt=0.2;
 
 	}
 	public void move()
@@ -32,11 +34,12 @@ public class Bullet {
 		y=y+vy*dt;
 		
 		if (x-radius<=0 || x+radius>=maxX) {
-			vx=-vx;
+			//TODO: Add better detachment handling.
+			outOfBounds=true;
 		}
 		
 		if(y-radius<=0 ||  y+radius>=maxY) {
-			vy=-vy;
+			outOfBounds=true;
 		}
 		
 		node.setCenterX(x);
@@ -51,5 +54,9 @@ public class Bullet {
 	public Circle getGraphic()
 	{
 		return node;
+	}
+	
+	public boolean getOutOfBounds() {
+		return outOfBounds;
 	}
 }

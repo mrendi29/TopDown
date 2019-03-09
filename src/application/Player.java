@@ -100,12 +100,12 @@ public class Player {
 	{
 		return lives;
 	}
-	public Bullet shoot(double x, double y, double radius)
-	{
-		Bullet b = new Bullet(x, y, radius);
-		
-		return b;
-	}
+//	public Bullet shoot(double x, double y, double radius)
+//	{
+//		Bullet b = new Bullet(x, y, radius);
+//		
+//		return b;
+//	}
 	
 	public double getX()
 	{
