@@ -35,11 +35,16 @@ public class Bullet {
 		
 		if (x-radius<=0 || x+radius>=maxX) {
 			//TODO: Add better detachment handling.
+			
+			
 			outOfBounds=true;
+		
 		}
 		
 		if(y-radius<=0 ||  y+radius>=maxY) {
+			
 			outOfBounds=true;
+			
 		}
 		
 		node.setCenterX(x);

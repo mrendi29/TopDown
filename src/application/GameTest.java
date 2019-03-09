@@ -129,9 +129,7 @@ public void start(Stage primaryStage) throws Exception {
 				for (int i=0; i<bullets.size();++i) {
 					bullets.get(i).move();
 					
-					if(bullets.get(i).getOutOfBounds()) {
-						root.getChildren().remove(bullets.get(i));
-					}
+				
 					
 				}
 				
