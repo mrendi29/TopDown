@@ -1,6 +1,12 @@
 package application;
+import java.awt.Color;
 import java.util.Random;
 
+import javax.management.openmbean.OpenDataException;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
 import javafx.scene.shape.Circle;
 
 public class Player {
@@ -22,7 +28,8 @@ public class Player {
 	
 	private Circle node;
 	private Random rand = new Random();
-	
+	RadialGradient radialGradient = 
+	         new RadialGradient(0, 0, 300, 178, 60, false, CycleMethod.NO_CYCLE);  
 	
 	public Player(double x, double y, double radius)
 	{
@@ -33,7 +40,6 @@ public class Player {
 		node = new Circle(x,y,radius);
 		
 		lives = 3;
-		
 		vx = 400; //pix/sec
 		vy = 150; //pic/sec
 		dt = 0.03; //sec
@@ -94,9 +100,9 @@ public class Player {
 	{
 		return lives;
 	}
-	public Bullet shoot(double startx, double starty, double length)
+	public Bullet shoot(double x, double y, double radius)
 	{
-		Bullet b = new Bullet(startx, starty, length);
+		Bullet b = new Bullet(x, y, radius);
 		
 		return b;
 	}
@@ -111,22 +117,28 @@ public class Player {
 	}
 	public void move()
 	{
-		if(isFacing.equals("up"))
-		{
-			node.setTranslateY(node.getTranslateY() - 10);
-		}
-		if(isFacing.equals("down"))
-		{
-			node.setTranslateY( node.getTranslateY()+ 10);
-		}
-		if(isFacing.equals("left"))
-		{
-			node.setTranslateX(node.getTranslateX() - 10);
-		}
-		if(isFacing.equals("right"))
-		{
-			node.setTranslateX(node.getTranslateX() + 10);
-		}
+//		if(isFacing.equals("up"))
+//		{
+//			node.setTranslateY(node.getTranslateY() - 10);
+//		}
+//		if(isFacing.equals("down"))
+//		{
+//			node.setTranslateY( node.getTranslateY()+ 10);
+//		}
+//		if(isFacing.equals("left"))
+//		{
+//			node.setTranslateX(node.getTranslateX() - 10);
+//		}
+//		if(isFacing.equals("right"))
+//		{
+//			node.setTranslateX(node.getTranslateX() + 10);
+//		}
+		
+		
+	}
+	
+	public void setColor() {
+		node.setFill(javafx.scene.paint.Color.RED);
 	}
 
 }

@@ -1,6 +1,7 @@
 //Wit topdown shooter project
 
 package application;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +23,7 @@ public static void main(String[] args)
 	launch(args);
 }
 boolean shotFired = false;
+ArrayList<Bullet> bullets= new ArrayList<>();
 public void start(Stage primaryStage) throws Exception {
 	
 		int windowSizeX = 1920;
@@ -34,9 +36,8 @@ public void start(Stage primaryStage) throws Exception {
 		Player p = new Player(windowSizeX/2, windowSizeY/2, 20);
 		Text healthNode = new Text(50,windowSizeY - 100,"Lives: "+Integer.toString(p.getLives()));
 		healthNode.setFont(new 	Font(20));
-		
 		root.getChildren().addAll(p.getGraphic(), healthNode);
-		
+	
 		
 		Scene s = new Scene(root ,windowSizeX, windowSizeY);
 		p.setBoundary(windowSizeX, windowSizeY);
@@ -75,21 +76,32 @@ public void start(Stage primaryStage) throws Exception {
 
 				}
 			}*/
-			if(e.getCode() == KeyCode.UP)
-			{
-				p.moveForward();
-			}
-			if(e.getCode() == KeyCode.LEFT)
-			{
-				p.moveLeft();
-			}
-			if(e.getCode() == KeyCode.RIGHT)
-			{
-				p.moveRight();
-			}
-			if(e.getCode() == KeyCode.DOWN)
-			{
-				p.moveDown();
+//			if(e.getCode() == KeyCode.UP)
+//			{
+//				p.moveForward();
+//			}
+//			if(e.getCode() == KeyCode.LEFT)
+//			{
+//				p.moveLeft();
+//			}
+//			if(e.getCode() == KeyCode.RIGHT)
+//			{
+//				p.moveRight();
+//			}
+//			if(e.getCode() == KeyCode.DOWN)
+//			{
+//				p.moveDown();
+//			}
+			
+			if (e.getCode() == KeyCode.R) {
+				Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
+				bullets.add(bullet);
+				root.getChildren().add(bullet.getGraphic());
+				
+				p.setColor();
+				
+				bullet.setBoundary(windowSizeX, windowSizeY);
+				
 			}
 		});
 		
@@ -97,7 +109,11 @@ public void start(Stage primaryStage) throws Exception {
 			@Override
 			public void run() {
 				
-				//Platform.runLater(()->p.move());
+				Platform.runLater(()->p.move());
+				for (int i=0; i<bullets.size();++i) {
+					bullets.get(i).move();
+					
+				}
 				
 	
 			}
