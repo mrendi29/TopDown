@@ -15,7 +15,7 @@ public class Enemy {
 	private double maxY;
 	private Circle node;
 	Random random = new Random();
-	private double dt;
+	private double dt= (random.nextDouble()+1)%0.06;
 	public Enemy(double x, double y, double vx, double vy) {
 		this.x = x;
 		this.y = y;
@@ -23,7 +23,7 @@ public class Enemy {
 		
 		this.vx = vx-x;
 		this.vy =  vy-y;
-		dt = 0.03;
+		
 	}
 	
 	
