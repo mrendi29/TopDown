@@ -1,7 +1,9 @@
 //Wit topdown shooter project
 
 package application;
+
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,65 +19,65 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class GameTest extends Application {
-	
-public static void main(String[] args) 
-{
-	launch(args);
-}
-boolean shotFired = false;
-ArrayList<Bullet> bullets= new ArrayList<>();
-public void start(Stage primaryStage) throws Exception {
-	
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	boolean shotFired = false;
+	ArrayList<Bullet> bullets = new ArrayList<>();
+	ArrayList<Enemy> enemies = new ArrayList<>();
+
+	public void start(Stage primaryStage) throws Exception {
+
 		int windowSizeX = 1920;
 		int windowSizeY = 1015;
 		
-		
-		
+		Random random = new Random(windowSizeX);
+
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Player p = new Player(windowSizeX/2, windowSizeY/2, 20);
-		Text healthNode = new Text(50,windowSizeY - 100,"Lives: "+Integer.toString(p.getLives()));
-		healthNode.setFont(new 	Font(20));
+		Player p = new Player(windowSizeX / 2, windowSizeY / 2, 20);
+		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
+		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
-	
 		
-		Scene s = new Scene(root ,windowSizeX, windowSizeY);
+		//Enemy enemy= new Enemy(windowSizeX/2+100, windowSizeY/2+100);
+	
+		Scene s = new Scene(root, windowSizeX, windowSizeY);
 		p.setBoundary(windowSizeX, windowSizeY);
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(s);
 		primaryStage.show();
-		
-		
+
 		root.requestFocus();
+
+		for (int i =0; i<5; ++i) {
+			double x =( random.nextDouble()*1000 )%windowSizeX;
+		Enemy enemy = new Enemy( x, 0 ,windowSizeX/2,windowSizeY/2);
+			enemies.add(enemy);
+			root.getChildren().add(enemies.get(i).getGraphic());
+			
+		}
 		
-		root.setOnKeyPressed(e->{
-			if(e.getCode()==KeyCode.ESCAPE)	
-			{   
+		
+		
+		root.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.ESCAPE) {
 				System.exit(0);
 			}
-			/*if(e.getCode()==KeyCode.SPACE)	
-			{   
-				if(p.isFacing().equals("up"))
-				{
-					p.shoot(p.getX(), p.getY(), 10);
-
-				}
-				if(p.isFacing().equals("down"))
-				{
-					//p.shoot(startx, starty, length);
-
-				}
-				if(p.isFacing().equals("left"))
-				{
-					//p.shoot(startx, starty, length);
-
-				}
-				if(p.isFacing().equals("right"))
-				{
-					//p.shoot(startx, starty, length);
-
-				}
-			}*/
+			/*
+			 * if(e.getCode()==KeyCode.SPACE) { if(p.isFacing().equals("up")) {
+			 * p.shoot(p.getX(), p.getY(), 10);
+			 * 
+			 * } if(p.isFacing().equals("down")) { //p.shoot(startx, starty, length);
+			 * 
+			 * } if(p.isFacing().equals("left")) { //p.shoot(startx, starty, length);
+			 * 
+			 * } if(p.isFacing().equals("right")) { //p.shoot(startx, starty, length);
+			 * 
+			 * } }
+			 */
 //			if(e.getCode() == KeyCode.UP)
 //			{
 //				p.moveForward();
@@ -92,51 +94,55 @@ public void start(Stage primaryStage) throws Exception {
 //			{
 //				p.moveDown();
 //			}
-			
+
 			if (e.getCode() == KeyCode.R) {
-				//Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
-				//bullets.add(bullet);
-				//root.getChildren().add(bullet.getGraphic());
-				
+				// Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
+				// bullets.add(bullet);
+				// root.getChildren().add(bullet.getGraphic());
+
 				p.setColor();
-				
-				//bullet.setBoundary(windowSizeX, windowSizeY);
-				
+
+				// bullet.setBoundary(windowSizeX, windowSizeY);
+
 			}
 		});
-		
-		
-		root.setOnMouseClicked(e-> {
-			
-			double xPosition= e.getSceneX();
-			double yPosition= e.getSceneY();
-			
-			Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5, xPosition, yPosition);
+
+		root.setOnMouseClicked(e -> {
+
+			double xPosition = e.getSceneX();
+			double yPosition = e.getSceneY();
+
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 5, xPosition, yPosition);
 			bullets.add(bullet);
-			
+
 			root.getChildren().add(bullet.getGraphic());
 			bullet.setBoundary(windowSizeX, windowSizeY);
-			
-		    System.out.println(e.getScreenX());
-		    System.out.println(e.getScreenY());
-			
+
+//			System.out.println(e.getScreenX());
+//			System.out.println(e.getScreenY());
+
 		});
-		t.scheduleAtFixedRate(new TimerTask(){
+		t.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				
-				Platform.runLater(()->p.move());
-				for (int i=0; i<bullets.size();++i) {
+
+				Platform.runLater(() -> p.move());
+				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).move();
-					
-				
-					
+						
 				}
 				
-	
+				for (int i =0; i<enemies.size() ; ++i) {
+					enemies.get(i).move();
+					
+				}
+					
+					
+					
+
 			}
-		},500,60);
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+		}, 500, 60);
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent arg0) {
