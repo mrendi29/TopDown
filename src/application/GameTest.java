@@ -33,19 +33,16 @@ public class GameTest extends Application {
 		int windowSizeX = 1920;
 		int windowSizeY = 980;
 
-		Random random = new Random(windowSizeX);
-
 		Timer t = new Timer();
 		Pane root = new Pane();
 		Player p = new Player(windowSizeX / 2, windowSizeY / 2, 20);
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
-		
-		//SpawnManager manager= new SpawnManager(root,windowSizeX,windowSizeY,enemies);
+
 		SpawnManager manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
-		// Enemy enemy= new Enemy(windowSizeX/2+100, windowSizeY/2+100);
+
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
 		p.setBoundary(windowSizeX, windowSizeY);
@@ -55,91 +52,16 @@ public class GameTest extends Application {
 
 		root.requestFocus();
 
-		/**
-		 * Beta randomizaton for spawning Enemies.
-		 */
-
-//		for (int i = 0; i < 5; ++i) {
-//			if (i == 1) {
-//				for (int j = 0; j < 5; ++j) {
-//					double x = (random.nextDouble() * 1000) % windowSizeX;
-//					Enemy enemy = new Enemy(x, 0, windowSizeX / 2, windowSizeY / 2);
-//					enemies.add(enemy);
-//					root.getChildren().add(enemies.get(j).getGraphic());
-//
-//				}
-//			}
-//
-//			if (i== 1) {
-//				// TODO: Ask professor for solution.
-//				for (int j = 5; j < 10; ++j) {
-//					double x = (random.nextDouble() * 1000) % windowSizeX;
-//					Enemy enemy = new Enemy(0, x, windowSizeX / 2, windowSizeY / 2);
-//					enemies.add(enemy);
-//					root.getChildren().add(enemies.get(j).getGraphic());
-//				}
-//			}
-//	
-//		}
-
-		root.setOnKeyPressed(e -> {
-			if (e.getCode() == KeyCode.ESCAPE) {
-				System.exit(0);
-			}
-			/*
-			 * if(e.getCode()==KeyCode.SPACE) { if(p.isFacing().equals("up")) {
-			 * p.shoot(p.getX(), p.getY(), 10);
-			 * 
-			 * } if(p.isFacing().equals("down")) { //p.shoot(startx, starty, length);
-			 * 
-			 * } if(p.isFacing().equals("left")) { //p.shoot(startx, starty, length);
-			 * 
-			 * } if(p.isFacing().equals("right")) { //p.shoot(startx, starty, length);
-			 * 
-			 * } }
-			 */
-//			if(e.getCode() == KeyCode.UP)
-//			{
-//				p.moveForward();
-//			}
-//			if(e.getCode() == KeyCode.LEFT)
-//			{
-//				p.moveLeft();
-//			}
-//			if(e.getCode() == KeyCode.RIGHT)
-//			{
-//				p.moveRight();
-//			}
-//			if(e.getCode() == KeyCode.DOWN)
-//			{
-//				p.moveDown();
-//			}
-
-			if (e.getCode() == KeyCode.R) {
-				// Bullet bullet = new Bullet(windowSizeX/2, windowSizeY/2, 5);
-				// bullets.add(bullet);
-				// root.getChildren().add(bullet.getGraphic());
-
-				p.setColor();
-
-				// bullet.setBoundary(windowSizeX, windowSizeY);
-
-			}
-		});
-
 		root.setOnMouseClicked(e -> {
 
 			double xPosition = e.getSceneX();
 			double yPosition = e.getSceneY();
 
-			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10,xPosition, yPosition);
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10, xPosition, yPosition);
 			bullets.add(bullet);
 
 			root.getChildren().add(bullet.getGraphic());
 			bullet.setBoundary(windowSizeX, windowSizeY);
-
-//			System.out.println(e.getScreenX());
-//			System.out.println(e.getScreenY());
 
 		});
 
@@ -147,8 +69,8 @@ public class GameTest extends Application {
 			@Override
 			public void run() {
 
-				Platform.runLater(() -> p.move());	
-				
+				Platform.runLater(() -> p.move());
+
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).move();
 					if (bullets.get(i).getOutOfBounds()) {
@@ -156,12 +78,12 @@ public class GameTest extends Application {
 						System.out.println("Removed");
 					}
 				}
-				
-				Platform.runLater(()->manager.spawn(enemies) );
-				
+
+				Platform.runLater(() -> manager.spawn(enemies));
+
 				for (int i = 0; i < enemies.size(); ++i) {
 					enemies.get(i).move();
-					if(enemies.get(i).isOutOfBounds()) {
+					if (enemies.get(i).isOutOfBounds()) {
 						enemies.remove(i);
 						System.out.println("ENEMY Removed");
 					}
@@ -178,6 +100,5 @@ public class GameTest extends Application {
 		});
 		root.requestFocus();
 	}
-	
 
 }

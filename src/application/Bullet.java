@@ -8,7 +8,6 @@ public class Bullet {
 	private Circle node;
 	private double x;
 	private double y;
-	private double endY;
 	private double vx;
 	private double vy;
 	private double dt;
@@ -18,13 +17,10 @@ public class Bullet {
 	private boolean outOfBounds;
 
 	public Bullet(double x, double y, double radius ,double vx, double vy) {
-
 		this.x = x;
 		this.y = y;
 		this.radius=radius;
-		
 		node = new Circle(x, y, radius);
-
 		this.vx = vx - x;
 		this.vy = vy - y;
 		dt = 0.2;
@@ -37,20 +33,14 @@ public class Bullet {
 
 		if (x - radius <= 0 || x + radius >= maxX) {
 			outOfBounds=true;
-
-		
-
 		}
 
-		if (y - radius <= 0 || y + radius >= maxY) {
-			
+		if (y - radius <= 0 || y + radius >= maxY) {	
 			outOfBounds=true;
-
 		}
 
 		node.setCenterX(x);
 		node.setCenterY(y);
-
 	}
 
 	public void setBoundary(double x, double y) {
