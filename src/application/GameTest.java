@@ -34,16 +34,19 @@ public class GameTest extends Application {
 		int windowSizeY = 980;
 
 		Random random = new Random(windowSizeX);
-		
+
 		Timer t = new Timer();
 		Pane root = new Pane();
 		Player p = new Player(windowSizeX / 2, windowSizeY / 2, 20);
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
-
+		
+		//SpawnManager manager= new SpawnManager(root,windowSizeX,windowSizeY,enemies);
+		SpawnManager manager = SpawnManager.createInstance();
+		manager.setVariables(root, windowSizeX, windowSizeY);
 		// Enemy enemy= new Enemy(windowSizeX/2+100, windowSizeY/2+100);
-		SpawnManager manager = new SpawnManager(root,windowSizeX,windowSizeY);
+
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
 		p.setBoundary(windowSizeX, windowSizeY);
 		primaryStage.setTitle("Game Test");
@@ -129,7 +132,7 @@ public class GameTest extends Application {
 			double xPosition = e.getSceneX();
 			double yPosition = e.getSceneY();
 
-			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 5, xPosition, yPosition);
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, xPosition, yPosition);
 			bullets.add(bullet);
 
 			root.getChildren().add(bullet.getGraphic());
@@ -139,21 +142,23 @@ public class GameTest extends Application {
 //			System.out.println(e.getScreenY());
 
 		});
+
 		t.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
 
+				Platform.runLater(() -> p.move());	
+				
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).move();
-
 				}
-
-				//FIXME: spawnmanager should be only instantiated once and then the spawn method should take care of the logic
-
-				manager.spawn(enemies);
-
 				
+				Platform.runLater(()->manager.spawn(enemies) );
 				
+				for (int i = 0; i < enemies.size(); ++i) {
+					enemies.get(i).move();
+					
+				}
 
 			}
 		}, 500, 60);

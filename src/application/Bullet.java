@@ -17,12 +17,13 @@ public class Bullet {
 	private double maxY;
 	private boolean outOfBounds;
 
-	public Bullet(double x, double y, double radius, double vx, double vy) {
+	public Bullet(double x, double y, double vx, double vy) {
+
 		this.x = x;
 		this.y = y;
-		this.radius = radius;
+		
 
-		node = new Circle(x, y, radius);
+		node = new Circle(x, y, 5);
 
 		this.vx = vx - x;
 		this.vy = vy - y;

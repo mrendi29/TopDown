@@ -7,28 +7,41 @@ import javafx.scene.layout.Pane;
 
 public class SpawnManager {
 	private  Pane root;
-	private  Random random;
-	private  int direction = (random.nextInt(200)) % 3;
+	private  Random random=new Random();
+	private  int direction;
 	private  int windowSizeX;
 	private  int windowSizeY;
-	private static SpawnManager manager = null;
-	
-	public SpawnManager(Pane root, int windowSizeX, int windowSizeY) {
-		this.root = root;
-		this.windowSizeX = windowSizeX;
-		this.windowSizeY = windowSizeY;
-		
+	private static SpawnManager _manager=null;
+	/**
+	 *  make an create instance 
+	 *  and a setter.
+	 *  private constructor 
+	 *  static instance method.
+	 *  
+	 * @param root
+	 * @param windowSizeX
+	 * @param windowSizeY
+	 * @param enemies
+	 */
+	private SpawnManager() {
+
 	}
 	
 	
-//	public static SpawnManager createInstance(Pane root, int windowSizeX, int windowSizeY,ArrayList<Enemy> enemyList) {
-//		if (manager == null) {
-//			manager = new SpawnManager(root, windowSizeX,windowSizeY,enemyList);
-//		}
-//		return manager;
-//	}
+	public void setVariables(Pane root, int windowSizeX, int windowSizeY) {
+		this.root = root;
+		this.windowSizeX = windowSizeX;
+		this.windowSizeY = windowSizeY;	
+	}
+	
+	public static SpawnManager createInstance() {
+		if (_manager == null) {
+			_manager = new SpawnManager();
+		}
+		return _manager;
+	}
 	public void spawn(ArrayList<Enemy> enemyList) {
-
+		direction = (random.nextInt(200)) % 3;
 		switch (direction) {
 		case 0:
 			spawnLeft(enemyList);
@@ -36,12 +49,12 @@ public class SpawnManager {
 		case 1:
 			spawnTop(enemyList);
 			break;
-//		case 2:
-//			spawnRight(enemyList);
-//			break;
-//		case 3:
-//			spawnBottom(enemyList);
-//			break;
+		case 2:
+			spawnRight(enemyList);
+			break;
+		case 3:
+			spawnBottom(enemyList);
+			break;
 			default:
 			spawnTop(enemyList);
 			break;
@@ -49,33 +62,49 @@ public class SpawnManager {
 
 	}
 
-	private  void spawnBottom(ArrayList<Enemy> enemyList) {
-		// TODO Auto-generated method stub
-
+	private void spawnBottom(ArrayList<Enemy> enemyList) {
+		for (int j = 0; j < 2; ++j) {
+			double y = (random.nextDouble() * 1000) % windowSizeX;
+			Enemy enemy = new Enemy(y, windowSizeY, windowSizeX / 2, windowSizeY / 2);
+			enemyList.add(enemy);
+			
+			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
+		}
+//		double y = (random.nextDouble() * 1000) % windowSizeX;
+//		Enemy enemy = new Enemy(y, windowSizeY, windowSizeX / 2, windowSizeY / 2);
+//		enemyList.add(enemy);
+//		return enemy;
+		
 	}
 
 	private void spawnRight(ArrayList<Enemy> enemyList) {
-		// TODO Auto-generated method stub
+		for (int j = 0; j < 2; ++j) {
+			double y = (random.nextDouble() * 1000) % windowSizeX;
+			Enemy enemy = new Enemy(windowSizeX, y, windowSizeX / 2, windowSizeY / 2);
+			enemyList.add(enemy);
+			//Indexof , or put the add enemy to the get.
+			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
+		}
 
 	}
 
 	private  void spawnTop(ArrayList<Enemy> enemyList) {
 		
-		for (int j = 0; j < 5; ++j) {
-			double x = (random.nextDouble() * 1000) % windowSizeX;
-			Enemy enemy = new Enemy(0, x, windowSizeX / 2, windowSizeY / 2);
+		for (int j = 0; j < 2; ++j) {
+			double y = (random.nextDouble() * 1000) % windowSizeX;
+			Enemy enemy = new Enemy(0, y, windowSizeX / 2, windowSizeY / 2);
 			enemyList.add(enemy);
-			root.getChildren().add(enemyList.get(j).getGraphic());
+			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}
 	}
 
 	private void spawnLeft(ArrayList<Enemy> enemyList) {
 
-		for (int j = 0; j < 5; ++j) {
+		for (int j = 0; j < 2; ++j) {
 			double x = (random.nextDouble() * 1000) % windowSizeX;
 			Enemy enemy = new Enemy(x, 0, windowSizeX / 2, windowSizeY / 2);
 			enemyList.add(enemy);
-			root.getChildren().add(enemyList.get(j).getGraphic());
+			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}
 
 	}
