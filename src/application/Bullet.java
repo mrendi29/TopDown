@@ -17,13 +17,13 @@ public class Bullet {
 	private double maxY;
 	private boolean outOfBounds;
 
-	public Bullet(double x, double y, double vx, double vy) {
+	public Bullet(double x, double y, double radius ,double vx, double vy) {
 
 		this.x = x;
 		this.y = y;
+		this.radius=radius;
 		
-
-		node = new Circle(x, y, 5);
+		node = new Circle(x, y, radius);
 
 		this.vx = vx - x;
 		this.vy = vy - y;
@@ -36,15 +36,15 @@ public class Bullet {
 		y = y + vy * dt;
 
 		if (x - radius <= 0 || x + radius >= maxX) {
-			// TODO: Add better detachment handling.
+			outOfBounds=true;
 
-			outOfBounds = true;
+		
 
 		}
 
 		if (y - radius <= 0 || y + radius >= maxY) {
-
-			outOfBounds = true;
+			
+			outOfBounds=true;
 
 		}
 

@@ -132,7 +132,7 @@ public class GameTest extends Application {
 			double xPosition = e.getSceneX();
 			double yPosition = e.getSceneY();
 
-			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, xPosition, yPosition);
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10,xPosition, yPosition);
 			bullets.add(bullet);
 
 			root.getChildren().add(bullet.getGraphic());
@@ -151,13 +151,20 @@ public class GameTest extends Application {
 				
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).move();
+					if (bullets.get(i).getOutOfBounds()) {
+						bullets.remove(i);
+						System.out.println("Removed");
+					}
 				}
 				
 				Platform.runLater(()->manager.spawn(enemies) );
 				
 				for (int i = 0; i < enemies.size(); ++i) {
 					enemies.get(i).move();
-					
+					if(enemies.get(i).isOutOfBounds()) {
+						enemies.remove(i);
+						System.out.println("ENEMY Removed");
+					}
 				}
 
 			}

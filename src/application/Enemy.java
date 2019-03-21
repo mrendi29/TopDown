@@ -8,18 +8,20 @@ import javafx.scene.shape.Rectangle;
 public class Enemy {
 
 	private double x,y;
-	private double length,width;
 	private double vx;
 	private double vy;
 	private double maxX;
 	private double maxY;
 	private Circle node;
+	private boolean outOfBounds=false;
 	Random random = new Random();
 	private double dt= (random.nextDouble()+1)%0.06;
-	public Enemy(double x, double y, double vx, double vy) {
+	private double radius;
+	public Enemy(double x, double y,double radius, double vx, double vy) {
 		this.x = x;
 		this.y = y;
-		node = new Circle(x,y,20);
+		this.radius=radius;
+		node = new Circle(x,y,radius);
 		
 		this.vx = vx-x;
 		this.vy =  vy-y;
@@ -40,29 +42,34 @@ public class Enemy {
 		x = x + vx * dt;
 		y = y + vy * dt;
 
-//		if (x - radius <= 0 || x + radius >= maxX) {
-//			// TODO: Add better detachment handling.
-//
-//			outOfBounds = true;
-//
-//		}
-//
-//		if (y - radius <= 0 || y + radius >= maxY) {
-//
-//			outOfBounds = true;
-//
-//		}
-//
+		if (x - radius <= 0 || x + radius >= maxX) {
+			// TODO: Add better detachment handling.
+
+			setOutOfBounds(true);
+
+		}
+
+		if (y - radius <= 0 || y + radius >= maxY) {
+
+			setOutOfBounds(true);
+
+		}
+
 		node.setCenterX(x);
 		node.setCenterY(y);
 		
 	}
-	
-	public void addEnemy( int count) {
-		for (int i =0; i<count; ++i) {
-			
-		}
+
+
+	public boolean isOutOfBounds() {
+		return outOfBounds;
 	}
+
+
+	public void setOutOfBounds(boolean outOfBounds) {
+		this.outOfBounds = outOfBounds;
+	}
+	
 	
 	
 	
