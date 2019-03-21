@@ -19,7 +19,7 @@ public class Enemy {
 	public Enemy(double x, double y, double vx, double vy) {
 		this.x = x;
 		this.y = y;
-		node = new Circle(x,y,30);
+		node = new Circle(x,y,20);
 		
 		this.vx = vx-x;
 		this.vy =  vy-y;
@@ -57,6 +57,15 @@ public class Enemy {
 		node.setCenterY(y);
 		
 	}
+	
+	public void addEnemy( int count) {
+		for (int i =0; i<count; ++i) {
+			
+		}
+	}
+	
+	
+	
 	
 	
 }

@@ -31,19 +31,19 @@ public class GameTest extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		int windowSizeX = 1920;
-		int windowSizeY = 1015;
-		
-		Random random = new Random(windowSizeX);
+		int windowSizeY = 980;
 
+		Random random = new Random(windowSizeX);
+		
 		Timer t = new Timer();
 		Pane root = new Pane();
 		Player p = new Player(windowSizeX / 2, windowSizeY / 2, 20);
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
-		
-		//Enemy enemy= new Enemy(windowSizeX/2+100, windowSizeY/2+100);
-	
+
+		// Enemy enemy= new Enemy(windowSizeX/2+100, windowSizeY/2+100);
+		SpawnManager manager = new SpawnManager(root,windowSizeX,windowSizeY);
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
 		p.setBoundary(windowSizeX, windowSizeY);
 		primaryStage.setTitle("Game Test");
@@ -52,16 +52,33 @@ public class GameTest extends Application {
 
 		root.requestFocus();
 
-		for (int i =0; i<5; ++i) {
-			double x =( random.nextDouble()*1000 )%windowSizeX;
-		Enemy enemy = new Enemy( x, 0 ,windowSizeX/2,windowSizeY/2);
-			enemies.add(enemy);
-			root.getChildren().add(enemies.get(i).getGraphic());
-			
-		}
-		
-		
-		
+		/**
+		 * Beta randomizaton for spawning Enemies.
+		 */
+
+//		for (int i = 0; i < 5; ++i) {
+//			if (i == 1) {
+//				for (int j = 0; j < 5; ++j) {
+//					double x = (random.nextDouble() * 1000) % windowSizeX;
+//					Enemy enemy = new Enemy(x, 0, windowSizeX / 2, windowSizeY / 2);
+//					enemies.add(enemy);
+//					root.getChildren().add(enemies.get(j).getGraphic());
+//
+//				}
+//			}
+//
+//			if (i== 1) {
+//				// TODO: Ask professor for solution.
+//				for (int j = 5; j < 10; ++j) {
+//					double x = (random.nextDouble() * 1000) % windowSizeX;
+//					Enemy enemy = new Enemy(0, x, windowSizeX / 2, windowSizeY / 2);
+//					enemies.add(enemy);
+//					root.getChildren().add(enemies.get(j).getGraphic());
+//				}
+//			}
+//	
+//		}
+
 		root.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ESCAPE) {
 				System.exit(0);
@@ -126,19 +143,17 @@ public class GameTest extends Application {
 			@Override
 			public void run() {
 
-				Platform.runLater(() -> p.move());
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).move();
-						
+
 				}
+
+				//FIXME: spawnmanager should be only instantiated once and then the spawn method should take care of the logic
+
+				manager.spawn(enemies);
+
 				
-				for (int i =0; i<enemies.size() ; ++i) {
-					enemies.get(i).move();
-					
-				}
-					
-					
-					
+				
 
 			}
 		}, 500, 60);
@@ -151,4 +166,6 @@ public class GameTest extends Application {
 		});
 		root.requestFocus();
 	}
+	
+
 }
