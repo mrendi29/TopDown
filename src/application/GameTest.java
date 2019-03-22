@@ -75,7 +75,7 @@ public class GameTest extends Application {
 					bullets.get(i).move();
 					if (bullets.get(i).getOutOfBounds()) {
 						bullets.remove(i);
-						System.out.println("Removed");
+						//System.out.println("Removed");
 					}
 				}
 
@@ -85,7 +85,7 @@ public class GameTest extends Application {
 					enemies.get(i).move();
 					if (enemies.get(i).isOutOfBounds()) {
 						enemies.remove(i);
-						System.out.println("ENEMY Removed");
+						//System.out.println("ENEMY Removed");
 					}
 				}
 

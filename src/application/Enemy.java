@@ -15,7 +15,7 @@ public class Enemy {
 	private Circle node;
 	private boolean outOfBounds = false;
 	Random random = new Random();
-	private double dt = (random.nextDouble() + 1) % 0.06;
+	private double dt = (random.nextDouble()+1) % 0.06;
 	private double radius;
 
 	public Enemy(double x, double y, double radius, double vx, double vy) {
