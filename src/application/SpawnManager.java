@@ -64,21 +64,22 @@ public class SpawnManager {
 	}
 
 	private void spawnBottom(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 1; ++j) {
+		for (int j = 0; j < 2; ++j) {
 			double y = (random.nextDouble() * 1000) % windowSizeX;
-			Enemy enemy = new Enemy(y, windowSizeY,20, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(y, windowSizeY+1,20, windowSizeX / 2, windowSizeY / 2);
+			enemy.createRandomSpeed();;
 			enemyList.add(enemy);
 			enemy.setBoundary(getWindowSizeX(), getWindowSizeY());
-			
 			getRoot().getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}
 	}
 
 	private void spawnRight(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 1; ++j) {
+		for (int j = 0; j < 2; ++j) {
 			double y = (random.nextDouble() * 1000) % windowSizeX;
-			Enemy enemy = new Enemy(windowSizeX, y,20, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(windowSizeX+1, y,20, windowSizeX / 2, windowSizeY / 2);
 			enemy.setBoundary(getWindowSizeX(), getWindowSizeY());
+			enemy.createRandomSpeed();;
 			enemyList.add(enemy);
 			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}
@@ -86,20 +87,22 @@ public class SpawnManager {
 	}
 
 	private  void spawnTop(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 1; ++j) {
+		for (int j = 0; j < 2; ++j) {
 			double y = (random.nextDouble() * 1000) % windowSizeX;
-			Enemy enemy = new Enemy(0, y,20, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(1, y,20, windowSizeX / 2, windowSizeY / 2);
 			enemy.setBoundary(getWindowSizeX(), getWindowSizeY());
+			enemy.createRandomSpeed();;
 			enemyList.add(enemy);
 			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}
 	}
 
 	private void spawnLeft(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 1; ++j) {
+		for (int j = 0; j < 2; ++j) {
 			double x = (random.nextDouble() * 1000) % windowSizeX;
-			Enemy enemy = new Enemy(x, 0, 20,windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(x, 1, 20,windowSizeX / 2, windowSizeY / 2);
 			enemy.setBoundary(getWindowSizeX(), getWindowSizeY());
+			enemy.createRandomSpeed();;
 			enemyList.add(enemy);
 			root.getChildren().add(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic());
 		}

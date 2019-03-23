@@ -11,10 +11,12 @@ public class GameObject {
 	private double maxX,maxY;
 	private double radius;
 	private Circle node;
-	
-	private boolean outOfBounds=false;
+	private double dt = 0.06;
+//	private boolean outOfBounds=false;
 	private Random random= new Random();
-	
+	private double speedCoeficient;
+
+
 	public GameObject(double x, double y, double radius,double vx, double vy) {
 		this.x=x;
 		this.y=y;
@@ -35,31 +37,31 @@ public class GameObject {
 		this.maxY=y;
 	}
 	
-	
 	public void move() {
-		x = x + vx * dt;
-		y = y + vy * dt;
-
-		if (x - radius <= 0 || x + radius >= maxX) {
-			setOutOfBounds(true);
-		}
-
-		if (y - radius <= 0 || y + radius >= maxY) {
-			setOutOfBounds(true);
-		}
-
+		
+		x = x + speedCoeficient * vx * dt;
+		y = y + speedCoeficient *vy * dt;
+		
 		node.setCenterX(x);
 		node.setCenterY(y);
 
 	}
 
-	public void setOutOfBounds(boolean b) {
-		this.outOfBounds=b;	
-	}
-	
 	
 	public boolean isOutOfBounds() {
-		return outOfBounds;
+		return 	 (x - radius <= 0 || x + radius >= maxX) || (y - radius <= 0 || y + radius >= maxY); 	
 	}
 	
+	public double getSpeedCoeficient() {
+		return speedCoeficient;
+	}
+
+	public void setSpeedCoeficient(double speedCoeficient) {
+		this.speedCoeficient = speedCoeficient;
+	}
+	
+	public void createRandomSpeed() {
+		double coef= Math.abs((random.nextDouble() )+0.5);
+		setSpeedCoeficient(coef);
+	}
 }
