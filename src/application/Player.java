@@ -15,11 +15,7 @@ public class Player {
 	private double x;
 	private double y;
 	private double radius;
-	private double vx;
-	private double vy;
-	private double dt;
-	private double maxX;
-	private double maxY;
+
 	private boolean alive;
 
 	private int lives;
@@ -36,9 +32,6 @@ public class Player {
 		node = new Circle(x, y, radius);
 
 		lives = 3;
-		vx = 400; // pix/sec
-		vy = 150; // pic/sec
-		dt = 0.03; // sec
 
 	}
 
@@ -50,37 +43,13 @@ public class Player {
 		return isFacing;
 	}
 
-	public void setBoundary(double x, double y) {
-		maxX = x;
-		maxY = y;
-	}
+//	public void setBoundary(double x, double y) {
+//		maxX = x;
+//		maxY = y;
+//	}
 
 	public Circle getGraphic() {
 		return node;
-	}
-
-	public void moveForward() {
-		// node.setTranslateY(node.getTranslateY() - 20);
-		isFacing = "up";
-
-	}
-
-	public void moveLeft() {
-		// node.setTranslateX(node.getTranslateX() - 20);
-		isFacing = "left";
-
-	}
-
-	public void moveDown() {
-		// node.setTranslateY( node.getTranslateY()+ 20);
-		isFacing = "down";
-
-	}
-
-	public void moveRight() {
-		// node.setTranslateX(node.getTranslateX() + 20);
-		isFacing = "right";
-
 	}
 
 	public boolean injure() {

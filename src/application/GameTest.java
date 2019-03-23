@@ -46,7 +46,6 @@ public class GameTest extends Application {
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-		p.setBoundary(windowSizeX, windowSizeY);
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(s);
 		primaryStage.show();
