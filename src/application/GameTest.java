@@ -50,8 +50,6 @@ public class GameTest extends Application {
 		primaryStage.setScene(s);
 		primaryStage.show();
 
-		root.requestFocus();
-
 		root.setOnMouseClicked(e -> {
 
 			double xPosition = e.getSceneX();
@@ -69,7 +67,6 @@ public class GameTest extends Application {
 			@Override
 			public void run() {
 				counter += 60;
-				Platform.runLater(() -> p.move());
 
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).setSpeedCoeficient(2.3);

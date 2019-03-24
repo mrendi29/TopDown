@@ -15,14 +15,10 @@ public class Player {
 	private double x;
 	private double y;
 	private double radius;
-
 	private boolean alive;
-
 	private int lives;
-	private String isFacing = "up";
-
 	private Circle node;
-	private Random rand = new Random();
+
 
 	public Player(double x, double y, double radius) {
 		this.x = x;
@@ -30,7 +26,6 @@ public class Player {
 		this.radius = radius;
 		alive = true;
 		node = new Circle(x, y, radius);
-
 		lives = 3;
 
 	}
@@ -38,15 +33,6 @@ public class Player {
 	public Player() {
 		this(200, 200, 20);
 	}
-
-	public String isFacing() {
-		return isFacing;
-	}
-
-//	public void setBoundary(double x, double y) {
-//		maxX = x;
-//		maxY = y;
-//	}
 
 	public Circle getGraphic() {
 		return node;
@@ -70,36 +56,8 @@ public class Player {
 //		return b;
 //	}
 
-	public double getX() {
-		return node.getTranslateX();
-	}
 
-	public double getY() {
-		return node.getTranslateY() - radius;
-	}
 
-	public void move() {
-//		if(isFacing.equals("up"))
-//		{
-//			node.setTranslateY(node.getTranslateY() - 10);
-//		}
-//		if(isFacing.equals("down"))
-//		{
-//			node.setTranslateY( node.getTranslateY()+ 10);
-//		}
-//		if(isFacing.equals("left"))
-//		{
-//			node.setTranslateX(node.getTranslateX() - 10);
-//		}
-//		if(isFacing.equals("right"))
-//		{
-//			node.setTranslateX(node.getTranslateX() + 10);
-//		}
 
-	}
-
-	public void setColor() {
-		node.setFill(javafx.scene.paint.Color.RED);
-	}
 
 }
