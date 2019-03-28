@@ -55,7 +55,7 @@ public class GameTest extends Application {
 			double xPosition = e.getSceneX();
 			double yPosition = e.getSceneY();
 
-			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 5, xPosition, yPosition);
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10, xPosition, yPosition);
 			bullets.add(bullet);
 
 			root.getChildren().add(bullet.getGraphic());
@@ -102,11 +102,10 @@ public class GameTest extends Application {
 				
 				collision();
 				
-				
 			}
 
 			public void collision() {
-			
+			//TODO: Use traditional Loops.
 				for (GameObject bullet:bullets) {
 					for (GameObject enemy: enemies) {
 						if (bullet.isCollision(enemy)) {

@@ -51,8 +51,8 @@ public class GameObject {
 	
 	public void move() {
 		
-		x = x + speedCoeficient * vx * dt;
-		y = y + speedCoeficient *vy * dt;
+		x = x + speedCoeficient/2 * vx * dt;
+		y = y + speedCoeficient/2 *vy * dt;
 		
 		node.setCenterX(x);
 		node.setCenterY(y);
@@ -74,7 +74,7 @@ public class GameObject {
 	}
 	
 	public void createRandomSpeed() {
-		double coef= Math.abs((random.nextDouble() )+0.5)-0.2;
+		double coef= Math.abs((random.nextDouble() )+0.3);
 		setSpeedCoeficient(coef);
 	}
 	
