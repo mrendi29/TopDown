@@ -15,7 +15,19 @@ public class GameObject {
 //	private boolean outOfBounds=false;
 	private Random random= new Random();
 	private double speedCoeficient;
+	private boolean alive=true;
 
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	
+	public boolean isDead() {
+		return !alive;
+	}
 
 	public GameObject(double x, double y, double radius,double vx, double vy) {
 		this.x=x;
@@ -44,12 +56,13 @@ public class GameObject {
 		
 		node.setCenterX(x);
 		node.setCenterY(y);
-
+		
+		
 	}
 
 	
 	public boolean isOutOfBounds() {
-		return 	 (x - radius <= 0 || x + radius >= maxX) || (y - radius <= 0 || y + radius >= maxY); 	
+		return 	 (x - radius <= -50 || x + radius >= maxX+50) || (y - radius <= -50 || y + radius >= maxY+50); 	
 	}
 	
 	public double getSpeedCoeficient() {
@@ -61,7 +74,13 @@ public class GameObject {
 	}
 	
 	public void createRandomSpeed() {
-		double coef= Math.abs((random.nextDouble() )+0.5);
+		double coef= Math.abs((random.nextDouble() )+0.5)-0.2;
 		setSpeedCoeficient(coef);
 	}
+	
+	public boolean isCollision(GameObject o2 ) {
+		return getGraphic().getBoundsInParent().intersects(o2.getGraphic().getBoundsInParent());
+			
+	}
+	
 }

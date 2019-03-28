@@ -67,12 +67,16 @@ public class GameTest extends Application {
 			@Override
 			public void run() {
 				counter += 60;
-
+				
+				
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).setSpeedCoeficient(2.3);
 					bullets.get(i).move();
 					
+						
 					if (bullets.get(i).isOutOfBounds()) {
+						Bullet bullet = bullets.get(i);
+						Platform.runLater(() -> root.getChildren().remove(bullet.getGraphic()));
 						bullets.remove(i);
 						// System.out.println("Removed");
 					}
@@ -88,12 +92,35 @@ public class GameTest extends Application {
 					enemies.get(i).move();
 					
 					if (enemies.get(i).isOutOfBounds()) {
-//					Enemy enemy = enemies.get(i);
-//					Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
+					Enemy enemy = enemies.get(i);
+					Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
 						enemies.remove(i);
-						// System.out.println("ENEMY Removed");
+						
+						//System.out.println("ENEMY Removed");
 					}
 				}
+				
+				collision();
+				
+				
+			}
+
+			public void collision() {
+			
+				for (GameObject bullet:bullets) {
+					for (GameObject enemy: enemies) {
+						if (bullet.isCollision(enemy)) {
+							bullet.setAlive(false);
+							enemy.setAlive(false);
+						}
+					}
+				}
+				//Go through all the bullets and enemies  if a bullet is dead remove it from the list.
+				bullets.removeIf(GameObject::isDead);
+				enemies.removeIf(GameObject::isDead);
+				
+//				bullets.forEach(GameObject::move);
+//				enemies.forEach(GameObject::move);
 			}
 		}, 500, 60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
