@@ -20,7 +20,7 @@ import javafx.stage.WindowEvent;
 
 public class GameTest extends Application {
 
-	double delay = 1000;
+	double delay = 2000;
 	boolean shotFired = false;
 	ArrayList<Bullet> bullets = new ArrayList<>();
 	ArrayList<Enemy> enemies = new ArrayList<>();
@@ -67,13 +67,11 @@ public class GameTest extends Application {
 			@Override
 			public void run() {
 				counter += 60;
-				
-				
+
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).setSpeedCoeficient(2.3);
 					bullets.get(i).move();
-					
-						
+
 					if (bullets.get(i).isOutOfBounds()) {
 						Bullet bullet = bullets.get(i);
 						Platform.runLater(() -> root.getChildren().remove(bullet.getGraphic()));
@@ -86,40 +84,48 @@ public class GameTest extends Application {
 					counter = 0;
 					Platform.runLater(() -> manager.spawn(enemies));
 				}
-				
+
 				for (int i = 0; i < enemies.size(); ++i) {
-				
+
 					enemies.get(i).move();
-					
+
 					if (enemies.get(i).isOutOfBounds()) {
-					Enemy enemy = enemies.get(i);
-					Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
+						Enemy enemy = enemies.get(i);
+						Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
 						enemies.remove(i);
-						
-						//System.out.println("ENEMY Removed");
+
+						// System.out.println("ENEMY Removed");
 					}
 				}
-				
+
 				collision();
-				
+
 			}
 
 			public void collision() {
-			//TODO: Use traditional Loops.
-				for (GameObject bullet:bullets) {
-					for (GameObject enemy: enemies) {
-						if (bullet.isCollision(enemy)) {
+				// TODO: Use traditional Loops.
+				for (int i=0; i< bullets.size(); ++i) {
+					for (int j=0; j<enemies.size(); ++j) {
+						
+						if (bullets.get(i).isCollision(enemies.get(j))) {
+							Bullet bullet = bullets.get(i);
+							Enemy enemy = enemies.get(j);
 							bullet.setAlive(false);
 							enemy.setAlive(false);
+							
+							Platform.runLater(() ->root.getChildren().removeAll(bullet.getGraphic(),enemy.getGraphic()));
 						}
 					}
 				}
-				//Go through all the bullets and enemies  if a bullet is dead remove it from the list.
+				
+				
+				// Go through all the bullets and enemies if a bullet is dead remove it from the
+				// list.
 				bullets.removeIf(GameObject::isDead);
 				enemies.removeIf(GameObject::isDead);
 				
-//				bullets.forEach(GameObject::move);
-//				enemies.forEach(GameObject::move);
+				bullets.forEach(GameObject::move);
+				enemies.forEach(GameObject::move);
 			}
 		}, 500, 60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
