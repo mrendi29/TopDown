@@ -1,13 +1,5 @@
 package application;
 
-import java.awt.Color;
-import java.util.Random;
-
-import javax.management.openmbean.OpenDataException;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
 import javafx.scene.shape.Circle;
 
 public class Player {

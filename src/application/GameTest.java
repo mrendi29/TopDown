@@ -32,6 +32,7 @@ public class GameTest extends Application {
 
 	public void start(Stage primaryStage) throws Exception {
 
+		
 		int windowSizeX = 1920;
 		int windowSizeY = 980;
 
