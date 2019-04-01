@@ -99,35 +99,11 @@ public class GameTest extends Application {
 					}
 				}
 
-				collision();
+				Physics.collision(bullets,enemies,root);
 
 			}
 
-			public void collision() {
-				// TODO: Use traditional Loops.
-				for (int i=0; i< bullets.size(); ++i) {
-					for (int j=0; j<enemies.size(); ++j) {
-						
-						if (bullets.get(i).isCollision(enemies.get(j))) {
-							Bullet bullet = bullets.get(i);
-							Enemy enemy = enemies.get(j);
-							bullet.setAlive(false);
-							enemy.setAlive(false);
-							
-							Platform.runLater(() ->root.getChildren().removeAll(bullet.getGraphic(),enemy.getGraphic()));
-						}
-					}
-				}
-				
-				
-				// Go through all the bullets and enemies if a bullet is dead remove it from the
-				// list.
-				bullets.removeIf(GameObject::isDead);
-				enemies.removeIf(GameObject::isDead);
-				
-				bullets.forEach(GameObject::move);
-				enemies.forEach(GameObject::move);
-			}
+
 		}, 500, 60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 

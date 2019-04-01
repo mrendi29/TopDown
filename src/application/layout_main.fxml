@@ -9,7 +9,7 @@
    <children>
       <Pane layoutX="25.0" layoutY="25.0" prefHeight="750.0" prefWidth="750.0">
          <children>
-            <Circle fill="DODGERBLUE" layoutX="375.0" layoutY="375.0" radius="50.0" rotate="-90.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" />
+            <Circle id="player" fill="#1f93ff" layoutX="375.0" layoutY="375.0" radius="50.0" rotate="-90.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" />
          </children>
       </Pane>
    </children>
