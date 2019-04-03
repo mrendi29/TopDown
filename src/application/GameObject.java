@@ -21,6 +21,42 @@ public class GameObject {
 		return alive;
 	}
 
+	public double getDt() {
+		return dt;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public double getVx() {
+		return vx;
+	}
+
+	public void setVx(double vx) {
+		this.vx = vx;
+	}
+
+	public double getVy() {
+		return vy;
+	}
+
+	public void setVy(double vy) {
+		this.vy = vy;
+	}
+
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
@@ -81,6 +117,11 @@ public class GameObject {
 	public boolean isCollision(GameObject o2 ) {
 		return getGraphic().getBoundsInParent().intersects(o2.getGraphic().getBoundsInParent());
 			
+	}
+
+	public double getRadius() {
+		// TODO Auto-generated method stub
+		return radius;
 	}
 	
 }

@@ -25,6 +25,7 @@ public abstract class Physics {
 					enemy.setAlive(false);
 
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
+					Platform.runLater(()-> root.getChildren().removeAll(bullet.getIv()));
 				}
 			}
 		}

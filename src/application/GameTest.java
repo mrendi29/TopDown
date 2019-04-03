@@ -59,7 +59,7 @@ public class GameTest extends Application {
 			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10, xPosition, yPosition);
 			bullets.add(bullet);
 
-			root.getChildren().add(bullet.getGraphic());
+			root.getChildren().addAll(bullet.getGraphic(),bullet.getIv());
 			bullet.setBoundary(windowSizeX, windowSizeY);
 			// System.out.println("SCREEN CLICKED");
 		});
