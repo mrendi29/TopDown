@@ -61,7 +61,7 @@ public class GameTest extends Application {
 
 			root.getChildren().addAll(bullet.getGraphic(),bullet.getIv());
 			bullet.setBoundary(windowSizeX, windowSizeY);
-			// System.out.println("SCREEN CLICKED");
+			
 		});
 
 		t.scheduleAtFixedRate(new TimerTask() {
@@ -75,7 +75,7 @@ public class GameTest extends Application {
 
 					if (bullets.get(i).isOutOfBounds()) {
 						Bullet bullet = bullets.get(i);
-						Platform.runLater(() -> root.getChildren().remove(bullet.getGraphic()));
+						Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(),bullet.getIv()));
 						bullets.remove(i);
 						// System.out.println("Removed");
 					}
