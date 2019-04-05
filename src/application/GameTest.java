@@ -81,10 +81,10 @@ public class GameTest extends Application {
 					}
 				}
 
-				if (counter > delay) {
-					counter = 0;
-					Platform.runLater(() -> manager.spawn(enemies));
-				}
+//				if (counter > delay) {
+//					counter = 0;
+//					Platform.runLater(() -> manager.spawn(enemies));
+//				}
 
 				for (int i = 0; i < enemies.size(); ++i) {
 

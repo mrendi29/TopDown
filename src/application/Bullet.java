@@ -15,10 +15,14 @@ public class Bullet extends GameObject {
 		imView = new ImageView();
 		imView.setImage(img);
 		
-		double rotationAngle= Math.toDegrees(Math.atan2((super.getVx()-super.getX()), super.getVy()-super.getY()));
+		//FIX THIS LINE.
+		double rotationAngle= Math.toDegrees(Math.atan((super.getVy() / super.getVx() )) );
+		System.out.println(super.getVy());
+		System.out.println(super.getVx());
+		System.out.println("Rotation: " + rotationAngle);
 		
-		imView.setRotate((rotationAngle)-(Math.PI/4));
-		
+		imView.setRotate((rotationAngle)+45);
+		System.out.println("Rotation Angle: " + ((rotationAngle)));
 	}
 	
 	public void move() {
