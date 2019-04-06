@@ -122,7 +122,7 @@ public class GameObject {
 	}
 
 	public void createRandomSpeed() {
-		double coef = Math.abs((random.nextDouble()) + 0.3);
+		double coef = Math.abs((random.nextDouble()) + 0.4);
 		setSpeedCoeficient(coef);
 	}
 
