@@ -1,23 +1,15 @@
 package application;
 
-import javafx.scene.shape.Circle;
 
-public class Player {
+public class Player extends GameObject {
 
-	private double x;
-	private double y;
-	private double radius;
 	private boolean alive;
 	private int lives;
-	private Circle node;
-
 
 	public Player(double x, double y, double radius) {
-		this.x = x;
-		this.y = y;
-		this.radius = radius;
+		super(x,y,radius);
+
 		alive = true;
-		node = new Circle(x, y, radius);
 		lives = 3;
 
 	}
@@ -26,9 +18,6 @@ public class Player {
 		this(200, 200, 20);
 	}
 
-	public Circle getGraphic() {
-		return node;
-	}
 
 	public boolean injure() {
 		lives--;

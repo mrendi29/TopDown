@@ -25,7 +25,7 @@ public class GameTest extends Application {
 	ArrayList<Bullet> bullets = new ArrayList<>();
 	ArrayList<Enemy> enemies = new ArrayList<>();
 	double counter = 0;
-
+	protected Player p;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -38,7 +38,7 @@ public class GameTest extends Application {
 
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Player p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
+		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
@@ -81,10 +81,10 @@ public class GameTest extends Application {
 					}
 				}
 
-//				if (counter > delay) {
-//					counter = 0;
-//					Platform.runLater(() -> manager.spawn(enemies));
-//				}
+				if (counter > delay) {
+					counter = 0;
+					Platform.runLater(() -> manager.spawn(enemies));
+				}
 
 				for (int i = 0; i < enemies.size(); ++i) {
 
@@ -100,7 +100,7 @@ public class GameTest extends Application {
 				}
 
 				Physics.collision(bullets,enemies,root);
-
+				Physics.playerCollision(enemies, root,p);
 			}
 
 

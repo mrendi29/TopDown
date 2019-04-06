@@ -76,6 +76,19 @@ public class GameObject {
 		node = new Circle(x,y,radius);
 	}
 	
+	/**
+	 * Constructor used for player.
+	 * @param x
+	 * @param y
+	 * @param radius
+	 */
+	public GameObject(double x, double y, double radius) {
+		this.x=x;
+		this.y=y;
+		this.radius=radius;
+		node = new Circle(x,y,radius);
+	}
+	
 	public Circle getGraphic() {
 		return node;
 	}

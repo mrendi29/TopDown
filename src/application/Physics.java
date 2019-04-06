@@ -25,7 +25,7 @@ public abstract class Physics {
 					enemy.setAlive(false);
 
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
-					Platform.runLater(()-> root.getChildren().removeAll(bullet.getIv()));
+					Platform.runLater(()-> root.getChildren().remove(bullet.getIv()));
 				}
 			}
 		}
@@ -36,6 +36,19 @@ public abstract class Physics {
 		enemies.removeIf(GameObject::isDead);
 		// Update Each Bullet and Enemy.
 		bullets.forEach(GameObject::move);
+		enemies.forEach(GameObject::move);
+	}
+	
+	public static void playerCollision(ArrayList<Enemy> enemies,Pane root, Player player) {
+		for (int i = 0 ; i<enemies.size(); ++i) {
+			if (enemies.get(i).isCollision(player)) {
+				Enemy enemy = enemies.get(i);
+				enemy.setAlive(false);
+				
+				Platform.runLater(() -> root.getChildren().removeAll( enemy.getGraphic()));
+			}
+		}
+		enemies.removeIf(GameObject::isDead);
 		enemies.forEach(GameObject::move);
 	}
 }
