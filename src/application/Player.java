@@ -1,13 +1,12 @@
 package application;
 
-
 public class Player extends GameObject {
 
 	private boolean alive;
 	private int lives;
 
 	public Player(double x, double y, double radius) {
-		super(x,y,radius);
+		super(x, y, radius);
 
 		alive = true;
 		lives = 3;
@@ -17,7 +16,6 @@ public class Player extends GameObject {
 	public Player() {
 		this(200, 200, 20);
 	}
-
 
 	public boolean injure() {
 		lives--;
@@ -36,9 +34,5 @@ public class Player extends GameObject {
 //		
 //		return b;
 //	}
-
-
-
-
 
 }

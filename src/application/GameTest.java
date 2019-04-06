@@ -26,13 +26,13 @@ public class GameTest extends Application {
 	ArrayList<Enemy> enemies = new ArrayList<>();
 	double counter = 0;
 	protected Player p;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public void start(Stage primaryStage) throws Exception {
 
-		
 		int windowSizeX = 1920;
 		int windowSizeY = 980;
 
@@ -59,9 +59,9 @@ public class GameTest extends Application {
 			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10, xPosition, yPosition);
 			bullets.add(bullet);
 
-			root.getChildren().addAll(bullet.getGraphic(),bullet.getIv());
+			root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
 			bullet.setBoundary(windowSizeX, windowSizeY);
-			
+
 		});
 
 		t.scheduleAtFixedRate(new TimerTask() {
@@ -69,15 +69,16 @@ public class GameTest extends Application {
 			public void run() {
 				counter += 60;
 
+				// TODO: Ask professor if having a bunch of static call methods here is bad.
+
 				for (int i = 0; i < bullets.size(); ++i) {
 					bullets.get(i).setSpeedCoeficient(2.3);
 					bullets.get(i).move();
 
 					if (bullets.get(i).isOutOfBounds()) {
 						Bullet bullet = bullets.get(i);
-						Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(),bullet.getIv()));
+						Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), bullet.getIv()));
 						bullets.remove(i);
-						// System.out.println("Removed");
 					}
 				}
 
@@ -94,15 +95,14 @@ public class GameTest extends Application {
 						Enemy enemy = enemies.get(i);
 						Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
 						enemies.remove(i);
-
-						// System.out.println("ENEMY Removed");
 					}
 				}
 
-				Physics.collision(bullets,enemies,root);
-				Physics.playerCollision(enemies, root,p);
-			}
+				Physics.collision(bullets, enemies, root);
 
+				Physics.playerCollision(enemies, root, p);
+
+			}
 
 		}, 500, 60);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

@@ -7,8 +7,9 @@ import javafx.scene.layout.Pane;
 
 public abstract class Physics {
 	/**
-	 * Method responsible for checking if bullets collide with enemies. 
-	 * If collision happens then remove both bullet and enemy from screen.
+	 * Method responsible for checking if bullets collide with enemies. If collision
+	 * happens then remove both bullet and enemy from screen.
+	 * 
 	 * @param bullets
 	 * @param enemies
 	 * @param root
@@ -25,12 +26,13 @@ public abstract class Physics {
 					enemy.setAlive(false);
 
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
-					Platform.runLater(()-> root.getChildren().remove(bullet.getIv()));
+					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
 				}
 			}
 		}
 
-		// Go through all the bullets and enemies if a bullet and enemy is "dead" remove it from the
+		// Go through all the bullets and enemies if a bullet and enemy is "dead" remove
+		// it from the
 		// list.
 		bullets.removeIf(GameObject::isDead);
 		enemies.removeIf(GameObject::isDead);
@@ -38,17 +40,25 @@ public abstract class Physics {
 		bullets.forEach(GameObject::move);
 		enemies.forEach(GameObject::move);
 	}
-	
-	public static void playerCollision(ArrayList<Enemy> enemies,Pane root, Player player) {
-		for (int i = 0 ; i<enemies.size(); ++i) {
+
+	/**
+	 * Method detecting collision between player and the enemies.
+	 * 
+	 * @param enemies
+	 * @param root
+	 * @param player
+	 */
+	public static void playerCollision(ArrayList<Enemy> enemies, Pane root, Player player) {
+		for (int i = 0; i < enemies.size(); ++i) {
 			if (enemies.get(i).isCollision(player)) {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
-				
-				Platform.runLater(() -> root.getChildren().removeAll( enemy.getGraphic()));
+
+				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic()));
 			}
 		}
 		enemies.removeIf(GameObject::isDead);
 		enemies.forEach(GameObject::move);
 	}
+
 }
