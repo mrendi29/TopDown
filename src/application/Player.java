@@ -10,6 +10,7 @@ public class Player extends GameObject {
 
 		alive = true;
 		lives = 3;
+		
 
 	}
 

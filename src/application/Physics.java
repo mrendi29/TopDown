@@ -25,8 +25,10 @@ public abstract class Physics {
 					bullet.setAlive(false);
 					enemy.setAlive(false);
 
+					//TODO: FIX RENDER PROBLEMS.
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
 					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
+					Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
 				}
 			}
 		}

@@ -56,7 +56,7 @@ public class GameTest extends Application {
 			double xPosition = e.getSceneX();
 			double yPosition = e.getSceneY();
 
-			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 10, xPosition, yPosition);
+			Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 13, xPosition, yPosition);
 			bullets.add(bullet);
 
 			root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
