@@ -14,3 +14,11 @@
 - [ ] GUI
 - [ ] Instructions Screen.
 - [ ] Main CleanUp
+
+## Video Walkthrough
+
+Here is a walkthrough of our progress.
+
+<img src='http://g.recordit.co/5zfsdIXkmM.gif' title='Progress Walkthrough' width='300' alt='Progress Walkthrough' />
+
+
