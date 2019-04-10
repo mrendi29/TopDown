@@ -19,6 +19,6 @@
 
 Here is a walkthrough of our progress.
 
-<img src='http://g.recordit.co/l2xx345jsi.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/5zfsdIXkmM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
