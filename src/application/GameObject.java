@@ -12,7 +12,6 @@ public class GameObject {
 	private double radius;
 	private Circle node;
 	private double dt = 0.06;
-//	private boolean outOfBounds=false;
 	private Random random = new Random();
 	private double speedCoeficient;
 	private boolean alive = true;
@@ -134,7 +133,6 @@ public class GameObject {
 	}
 
 	public double getRadius() {
-		// TODO Auto-generated method stub
 		return radius;
 	}
 

@@ -43,10 +43,22 @@ public class Enemy extends GameObject {
 	
 	public double angleOfRotation() {
 		double rotationAngle = Math.toDegrees(Math.atan((super.getVy() / super.getVx())));
-		if (super.getVx() < 0) {
-			return ((rotationAngle) + 225);
-		} else {
-			return ((rotationAngle) + 45);
+	
+		// x< 0 && y < 0
+		if (super.getVx()<0 && super.getVy()<0) {
+			return rotationAngle -90;
+		} 
+		// x > 0 y < 0
+		else if(super.getVx()>0 && super.getVy() > 0) {
+			return rotationAngle+90;
+		}
+		// x <0  && y > 0
+		else if (super.getVx()>0 && super.getVy() <0) {
+			return rotationAngle+90;
+		}
+		//x>0  && y >0
+		else {
+			return rotationAngle -90;
 		}
 	}
 
