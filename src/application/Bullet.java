@@ -16,8 +16,8 @@ public class Bullet extends GameObject {
 
 		// Determining angle in which the bullet should rotate
 		imView.setRotate(angleOfRotation());
-		
-		//Make the bullet bounding box invisible so images can appear better.
+
+		// Make the bullet bounding box invisible so images can appear better.
 		super.getGraphic().setOpacity(0);
 
 	}
