@@ -9,11 +9,8 @@ import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -38,40 +35,10 @@ public class GameTest extends Application {
 
 		int windowSizeX = 1920;
 		int windowSizeY = 980;
-		int centerX = windowSizeX/2;
-		int centerY = windowSizeY/2;
 
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Pane login = new Pane();
-		Scene log = new Scene(login,windowSizeX, windowSizeY);
-
 		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
-		Button b = new Button("login");
-		b.setLayoutX(centerX + 100);
-		b.setLayoutY(centerY);
-		TextField username = new TextField();
-		username.setLayoutX(centerX - 100);
-		username.setLayoutY(centerY);
-		Text userText = new Text(username.getLayoutX() - 200, username.getLayoutY()+50, "username");
-		userText.setStyle("-fx-font: 24 arial;");
-		TextField password = new TextField();
-		password.setLayoutX(centerX - 300);
-		password.setLayoutY(centerY);
-		Text passText = new Text(password.getLayoutX()+200, password.getLayoutY()+50, "password");
-		passText.setStyle("-fx-font: 24 arial;");
-		
-		login.getChildren().addAll(b, username, password, userText, passText);
-		
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(log);
-		primaryStage.show();
-		
-		
-		
-		
-		
-		
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
@@ -80,16 +47,10 @@ public class GameTest extends Application {
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-				
-		b.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				primaryStage.setTitle("Game");
-				primaryStage.setScene(s);
-				primaryStage.show();
-			}
-		});
-		
+		primaryStage.setTitle("Game Test");
+		primaryStage.setScene(s);
+		primaryStage.show();
+
 		root.setOnMouseClicked(e -> {
 
 			double xPosition = e.getSceneX();
