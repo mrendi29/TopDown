@@ -46,7 +46,7 @@ public class GameTest extends Application {
 		Pane login = new Pane();
 		Scene log = new Scene(login,windowSizeX, windowSizeY);
 
-		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
+		p = new Player(windowSizeX / 2, windowSizeY / 2, 30, "ufo.png");
 		Button b = new Button("login");
 		b.setLayoutX(centerX + 100);
 		b.setLayoutY(centerY);
@@ -67,14 +67,11 @@ public class GameTest extends Application {
 		primaryStage.setScene(log);
 		primaryStage.show();
 		
-		
-		
-		
-		
-		
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
-		root.getChildren().addAll(p.getGraphic(), healthNode);
+		p.getNode().setX(centerX - 125);
+		p.getNode().setY(centerY - 125);
+		root.getChildren().addAll(p.getGraphic(), healthNode, p.getNode());
 
 		SpawnManager manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
@@ -101,6 +98,11 @@ public class GameTest extends Application {
 			root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
 			bullet.setBoundary(windowSizeX, windowSizeY);
 
+		});
+		root.setOnKeyPressed(e ->{
+			
+			
+			
 		});
 
 		t.scheduleAtFixedRate(new TimerTask() {
