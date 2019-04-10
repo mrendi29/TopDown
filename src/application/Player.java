@@ -7,8 +7,10 @@ public class Player extends GameObject {
 
 	public Player(double x, double y, double radius) {
 		super(x, y, radius);
+
 		alive = true;
 		lives = 3;
+		
 
 	}
 
@@ -27,5 +29,11 @@ public class Player extends GameObject {
 	public int getLives() {
 		return lives;
 	}
+//	public Bullet shoot(double x, double y, double radius)
+//	{
+//		Bullet b = new Bullet(x, y, radius);
+//		
+//		return b;
+//	}
 
 }

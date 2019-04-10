@@ -87,7 +87,8 @@ public class GameObject {
 		this.y = y;
 		this.radius = radius;
 		node = new Circle(x, y, radius);
-
+		
+		
 	}
 
 	public Circle getGraphic() {
@@ -122,7 +123,7 @@ public class GameObject {
 	}
 
 	public void createRandomSpeed() {
-		double coef = Math.abs((random.nextDouble()) + 0.3) - 0.2;
+		double coef = Math.abs((random.nextDouble()) + 0.3)-0.2;
 		setSpeedCoeficient(coef);
 	}
 
