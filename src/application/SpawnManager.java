@@ -56,7 +56,6 @@ public class SpawnManager {
 			spawnBottom(enemyList);
 			break;
 		default:
-			
 			break;
 		}
 
