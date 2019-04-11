@@ -25,7 +25,7 @@ public abstract class Physics {
 					bullet.setAlive(false);
 					enemy.setAlive(false);
 
-					// TODO: FIX RENDER PROBLEMS.
+					//TODO: FIX RENDER PROBLEMS.
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
 					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
 					Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
@@ -57,6 +57,7 @@ public abstract class Physics {
 				enemy.setAlive(false);
 
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic()));
+				Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
 			}
 		}
 		enemies.removeIf(GameObject::isDead);

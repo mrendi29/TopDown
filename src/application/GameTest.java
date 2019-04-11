@@ -9,11 +9,8 @@ import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -38,11 +35,10 @@ public class GameTest extends Application {
 
 		int windowSizeX = 1920;
 		int windowSizeY = 980;
-		int centerX = windowSizeX/2;
-		int centerY = windowSizeY/2;
 
 		Timer t = new Timer();
 		Pane root = new Pane();
+<<<<<<< HEAD
 		
 
 		p = new Player(centerX, centerX, 30, "ufo.png");
@@ -55,16 +51,18 @@ public class GameTest extends Application {
 		primaryStage.setScene(start.getScene());
 		primaryStage.show();
 		
+=======
+		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
+>>>>>>> branch 'master' of https://eagle.cs.wit.edu/caushie/TopDown.git
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
-		p.getNode().setX(centerX - 125);
-		p.getNode().setY(centerY - 125);
-		root.getChildren().addAll(p.getGraphic(), healthNode, p.getNode());
+		root.getChildren().addAll(p.getGraphic(), healthNode);
 
 		SpawnManager manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
+<<<<<<< HEAD
 				
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -75,6 +73,12 @@ public class GameTest extends Application {
 			}
 		});
 		
+=======
+		primaryStage.setTitle("Game Test");
+		primaryStage.setScene(s);
+		primaryStage.show();
+
+>>>>>>> branch 'master' of https://eagle.cs.wit.edu/caushie/TopDown.git
 		root.setOnMouseClicked(e -> {
 
 			double xPosition = e.getSceneX();
@@ -86,11 +90,6 @@ public class GameTest extends Application {
 			root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
 			bullet.setBoundary(windowSizeX, windowSizeY);
 
-		});
-		root.setOnKeyPressed(e ->{
-			
-			
-			
 		});
 
 		t.scheduleAtFixedRate(new TimerTask() {
