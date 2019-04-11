@@ -43,28 +43,16 @@ public class GameTest extends Application {
 
 		Timer t = new Timer();
 		Pane root = new Pane();
-		Pane login = new Pane();
-		Scene log = new Scene(login,windowSizeX, windowSizeY);
+		
 
-		p = new Player(windowSizeX / 2, windowSizeY / 2, 30, "ufo.png");
-		Button b = new Button("login");
-		b.setLayoutX(centerX + 100);
-		b.setLayoutY(centerY);
-		TextField username = new TextField();
-		username.setLayoutX(centerX - 100);
-		username.setLayoutY(centerY);
-		Text userText = new Text(username.getLayoutX() - 200, username.getLayoutY()+50, "username");
-		userText.setStyle("-fx-font: 24 arial;");
-		TextField password = new TextField();
-		password.setLayoutX(centerX - 300);
-		password.setLayoutY(centerY);
-		Text passText = new Text(password.getLayoutX()+200, password.getLayoutY()+50, "password");
-		passText.setStyle("-fx-font: 24 arial;");
+		p = new Player(centerX, centerX, 30, "ufo.png");
 		
-		login.getChildren().addAll(b, username, password, userText, passText);
+		StartMenu start = new StartMenu(windowSizeX, windowSizeY);
 		
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(log);
+		start.getPane().getChildren().addAll(start.getButton());
+		
+		primaryStage.setTitle(start.getTitle());
+		primaryStage.setScene(start.getScene());
 		primaryStage.show();
 		
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
@@ -78,7 +66,7 @@ public class GameTest extends Application {
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
 				
-		b.setOnAction(new EventHandler<ActionEvent>() {
+		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle("Game");
