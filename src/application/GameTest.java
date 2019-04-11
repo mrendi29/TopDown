@@ -38,22 +38,8 @@ public class GameTest extends Application {
 
 		Timer t = new Timer();
 		Pane root = new Pane();
-<<<<<<< HEAD
-		
 
-		p = new Player(centerX, centerX, 30, "ufo.png");
-		
-		StartMenu start = new StartMenu(windowSizeX, windowSizeY);
-		
-		start.getPane().getChildren().addAll(start.getButton());
-		
-		primaryStage.setTitle(start.getTitle());
-		primaryStage.setScene(start.getScene());
-		primaryStage.show();
-		
-=======
 		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
->>>>>>> branch 'master' of https://eagle.cs.wit.edu/caushie/TopDown.git
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		root.getChildren().addAll(p.getGraphic(), healthNode);
@@ -62,23 +48,11 @@ public class GameTest extends Application {
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-<<<<<<< HEAD
-				
-		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				primaryStage.setTitle("Game");
-				primaryStage.setScene(s);
-				primaryStage.show();
-			}
-		});
-		
-=======
+
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(s);
 		primaryStage.show();
 
->>>>>>> branch 'master' of https://eagle.cs.wit.edu/caushie/TopDown.git
 		root.setOnMouseClicked(e -> {
 
 			double xPosition = e.getSceneX();
