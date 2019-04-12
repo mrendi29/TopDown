@@ -42,10 +42,10 @@ public class GameTest extends Application {
 
 		root = new Pane();
 
-		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
+		p = new Player(windowSizeX / 2, windowSizeY / 2,30, "ufo.png");
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
-		root.getChildren().addAll(p.getGraphic(), healthNode);
+		root.getChildren().addAll(p.getGraphic(), healthNode, p.getImgv());
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
