@@ -56,7 +56,7 @@ public abstract class Physics {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
 
-				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic()));
+				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));
 			}
 		}
 		enemies.removeIf(GameObject::isDead);

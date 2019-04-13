@@ -16,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,6 +31,7 @@ public class GameTest extends Application {
 	ArrayList<Enemy> enemies = new ArrayList<>();
 	double counter = 0;
 	protected Player p;
+	protected boolean isPaused =true;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -45,11 +48,16 @@ public class GameTest extends Application {
 		Pane root = new Pane();
 		
 
-		p = new Player(centerX, centerX, 30, "ufo.png");
+		p = new Player(centerX, centerY, 30, "ufo.png");
 		
-		StartMenu start = new StartMenu(windowSizeX, windowSizeY);
+		//creates new StartMenu
+		StartMenu start = new StartMenu(windowSizeX, windowSizeY,"space.png","title.png");
 		
-		start.getPane().getChildren().addAll(start.getButton());
+		//sets background image to be space
+		start.getPane().setBackground(start.getBG());
+		
+		
+		start.getPane().getChildren().addAll(start.getButton(), start.getTitlePic());
 		
 		primaryStage.setTitle(start.getTitle());
 		primaryStage.setScene(start.getScene());
@@ -57,9 +65,13 @@ public class GameTest extends Application {
 		
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
+		healthNode.setFill(Color.rgb(255, 255, 255));
+		
 		p.getNode().setX(centerX - 125);
 		p.getNode().setY(centerY - 125);
-		root.getChildren().addAll(p.getGraphic(), healthNode, p.getNode());
+		
+		root.setBackground(start.getBG());
+		root.getChildren().addAll(p.getGraphic(), p.getNode(),healthNode);
 
 		SpawnManager manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
@@ -69,6 +81,7 @@ public class GameTest extends Application {
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
+				isPaused = false;
 				primaryStage.setTitle("Game");
 				primaryStage.setScene(s);
 				primaryStage.show();
@@ -96,7 +109,12 @@ public class GameTest extends Application {
 		t.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
+				
+				if(!isPaused)
+				{
+					
 				counter += 60;
+
 
 				// TODO: Ask professor if having a bunch of static call methods here is bad.
 
@@ -110,7 +128,7 @@ public class GameTest extends Application {
 						bullets.remove(i);
 					}
 				}
-
+				
 				if (counter > delay) {
 					counter = 0;
 					Platform.runLater(() -> manager.spawn(enemies));
@@ -130,10 +148,13 @@ public class GameTest extends Application {
 				Physics.collision(bullets, enemies, root);
 
 				Physics.playerCollision(enemies, root, p);
-
+				p.injure();
+				root.getChildren().addAll(healthNode);
 			}
 
-		}, 500, 60);
+			}}, 500, 60);
+		
+		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override

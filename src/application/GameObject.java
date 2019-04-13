@@ -130,7 +130,6 @@ public class GameObject {
 		return this.getGraphic().getBoundsInParent().intersects(o2.getGraphic().getBoundsInParent());
 
 	}
-
 	public double getRadius() {
 		return radius;
 	}
