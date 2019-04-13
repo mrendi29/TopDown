@@ -69,6 +69,7 @@ public class GameTest extends Application {
 			}
 
 		}, 500, 60);
+		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
