@@ -18,11 +18,10 @@ import javafx.scene.layout.Pane;
 public class SpawnManager {
 	private Pane root;
 	private Random random = new Random();
-//	private int direction;
 	private int windowSizeX;
 	private int windowSizeY;
 	private static SpawnManager _manager = null;
-	private int radius=20;
+	private int radius = 20;
 
 	private SpawnManager() {
 	}
@@ -64,7 +63,7 @@ public class SpawnManager {
 	// TODO: FIX PROBLEM WITH RANDOM NUMBERS.
 	private void spawnBottom(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
-			double x = (random.nextInt( 1800) %windowSizeX);
+			double x = (random.nextInt(1800) % windowSizeX);
 			Enemy enemy = new Enemy(x, windowSizeY + 1, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
@@ -72,7 +71,7 @@ public class SpawnManager {
 
 	private void spawnRight(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
-			double y = (random.nextInt( 1800) %windowSizeY);
+			double y = (random.nextInt(1800) % windowSizeY);
 			Enemy enemy = new Enemy(windowSizeX + 1, y, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
@@ -81,7 +80,7 @@ public class SpawnManager {
 
 	private void spawnTop(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
-			double y = (random.nextInt( 1800) %windowSizeX);
+			double y = (random.nextInt(1800) % windowSizeX);
 			Enemy enemy = new Enemy(y, 1, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
@@ -89,7 +88,7 @@ public class SpawnManager {
 
 	private void spawnLeft(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
-			double x = (random.nextInt(2000) %windowSizeY);
+			double x = (random.nextInt(2000) % windowSizeY);
 			Enemy enemy = new Enemy(0, x, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
@@ -99,7 +98,8 @@ public class SpawnManager {
 		enemy.setBoundary(getWindowSizeX(), getWindowSizeY());
 		enemy.createRandomSpeed();
 		enemyList.add(enemy);
-		root.getChildren().addAll(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic(),enemyList.get((int) enemyList.indexOf(enemy)).getIv()	);
+		root.getChildren().addAll(enemyList.get((int) enemyList.indexOf(enemy)).getGraphic(),
+				enemyList.get((int) enemyList.indexOf(enemy)).getIv());
 	}
 
 	public Pane getRoot() {

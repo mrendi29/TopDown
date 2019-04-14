@@ -31,11 +31,9 @@ public class GameTest extends Application {
 	protected Player p;
 	private int windowSizeX = 1920;
 	private int windowSizeY = 980;
-	
 	Pane root;
 	SpawnManager manager;
-	protected boolean isPaused =true;
-
+	protected boolean isPaused = true;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -43,59 +41,33 @@ public class GameTest extends Application {
 
 	public void start(Stage primaryStage) throws Exception {
 
-
 		Timer t = new Timer();
-
-
 		root = new Pane();
-
 		p = new Player(windowSizeX / 2, windowSizeY / 2, 50);
 
-	
-		
+		// creates new StartMenu
+		StartMenu start = new StartMenu(windowSizeX, windowSizeY, "space.png", "title.png");
 
-	//	p = new Player(centerX, centerY, 30, "ufo.png");
-		
-		//creates new StartMenu
-		StartMenu start = new StartMenu(windowSizeX, windowSizeY,"space.png","title.png");
-		
-		//sets background image to be space
+		// sets background image to be space
 		start.getPane().setBackground(start.getBG());
-		
-		
 		start.getPane().getChildren().addAll(start.getButton(), start.getTitlePic());
-		
+
 		primaryStage.setTitle(start.getTitle());
 		primaryStage.setScene(start.getScene());
 		primaryStage.show();
-		
-//>>>>>>> refs/heads/ZachNEWBraanch
+
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
-//<<<<<<< HEAD
-//		root.getChildren().addAll(p.getGraphic(), healthNode);
-//=======
 		healthNode.setFill(Color.rgb(255, 255, 255));
-		
-//		p.getNode().setX(centerX - 125);
-//		p.getNode().setY(centerY - 125);
-		
+
 		root.setBackground(start.getBG());
-		root.getChildren().addAll(p.getGraphic(), p.getNode(),healthNode);
-//>>>>>>> refs/heads/ZachNEWBraanch
+		root.getChildren().addAll(p.getGraphic(), p.getNode(), healthNode);
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-//<<<<<<< HEAD
-//
-//		primaryStage.setTitle("Game Test");
-//		primaryStage.setScene(s);
-//		primaryStage.show();
-//
-//=======
-				
+
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -105,7 +77,6 @@ public class GameTest extends Application {
 				primaryStage.show();
 			}
 		});
-		
 
 		root.setOnMouseClicked(e -> {
 
@@ -114,25 +85,17 @@ public class GameTest extends Application {
 		});
 
 		t.scheduleAtFixedRate(new TimerTask() {
+
 			@Override
-//<<<<<<< HEAD
-//			public void run() {	
-//				update();
-//=======
 			public void run() {
-				
-				if(!isPaused){
+
+				if (!isPaused) {
 					update();
 				}
-					
-				
 
-//<<<<<<< HEAD
-//		}, 500, 60);
-//=======
-			}}, 500, 60);
-		
-		
+			}
+		}, 500, 60);
+
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
@@ -152,7 +115,7 @@ public class GameTest extends Application {
 
 		root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
 		bullet.setBoundary(windowSizeX, windowSizeY);
-		
+
 	}
 
 	protected void update() {
@@ -160,6 +123,7 @@ public class GameTest extends Application {
 
 		// TODO: Ask professor if having a bunch of static call methods here is bad.
 
+		// TODO: Ask professor how to resolve java thread bug.
 		for (int i = 0; i < bullets.size(); ++i) {
 			bullets.get(i).setSpeedCoeficient(2.3);
 			bullets.get(i).move();

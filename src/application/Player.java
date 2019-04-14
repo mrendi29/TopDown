@@ -7,8 +7,8 @@ public class Player extends GameObject {
 
 	private boolean alive;
 	private int lives;
- 	private Image img= new Image("ufo.png");
- 	private ImageView imgv;
+	private Image img = new Image("ufo.png");
+	private ImageView imgv;
 
 	public Player(double x, double y, double radius) {
 		super(x, y, radius);
@@ -17,9 +17,9 @@ public class Player extends GameObject {
 		lives = 3;
 		imgv = new ImageView();
 		imgv.setImage(img);
-		
-		imgv.setX(x-125);
-		imgv.setY(y-125);
+
+		imgv.setX(x - 125);
+		imgv.setY(y - 125);
 	}
 
 	public Player() {
@@ -37,15 +37,9 @@ public class Player extends GameObject {
 	public int getLives() {
 		return lives;
 	}
-	public ImageView getNode()
- 	{
- 		return imgv;
- 	}
-//	public Bullet shoot(double x, double y, double radius)
-//	{
-//		Bullet b = new Bullet(x, y, radius);
-//		
-//		return b;
-//	}
+
+	public ImageView getNode() {
+		return imgv;
+	}
 
 }
