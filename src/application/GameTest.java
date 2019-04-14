@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -28,16 +29,14 @@ public class GameTest extends Application {
 	ArrayList<Enemy> enemies = new ArrayList<>();
 	double counter = 0;
 	protected Player p;
-<<<<<<< HEAD
 	private int windowSizeX = 1920;
 	private int windowSizeY = 980;
 	
 	Pane root;
 	SpawnManager manager;
-=======
 	protected boolean isPaused =true;
 
->>>>>>> refs/heads/ZachNEWBraanch
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -46,16 +45,16 @@ public class GameTest extends Application {
 
 
 		Timer t = new Timer();
-<<<<<<< HEAD
+
 
 		root = new Pane();
 
-		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
-=======
-		Pane root = new Pane();
+		p = new Player(windowSizeX / 2, windowSizeY / 2, 50);
+
+	
 		
 
-		p = new Player(centerX, centerY, 30, "ufo.png");
+	//	p = new Player(centerX, centerY, 30, "ufo.png");
 		
 		//creates new StartMenu
 		StartMenu start = new StartMenu(windowSizeX, windowSizeY,"space.png","title.png");
@@ -70,32 +69,32 @@ public class GameTest extends Application {
 		primaryStage.setScene(start.getScene());
 		primaryStage.show();
 		
->>>>>>> refs/heads/ZachNEWBraanch
+//>>>>>>> refs/heads/ZachNEWBraanch
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
-<<<<<<< HEAD
-		root.getChildren().addAll(p.getGraphic(), healthNode);
-=======
+//<<<<<<< HEAD
+//		root.getChildren().addAll(p.getGraphic(), healthNode);
+//=======
 		healthNode.setFill(Color.rgb(255, 255, 255));
 		
-		p.getNode().setX(centerX - 125);
-		p.getNode().setY(centerY - 125);
+//		p.getNode().setX(centerX - 125);
+//		p.getNode().setY(centerY - 125);
 		
 		root.setBackground(start.getBG());
 		root.getChildren().addAll(p.getGraphic(), p.getNode(),healthNode);
->>>>>>> refs/heads/ZachNEWBraanch
+//>>>>>>> refs/heads/ZachNEWBraanch
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-<<<<<<< HEAD
-
-		primaryStage.setTitle("Game Test");
-		primaryStage.setScene(s);
-		primaryStage.show();
-
-=======
+//<<<<<<< HEAD
+//
+//		primaryStage.setTitle("Game Test");
+//		primaryStage.setScene(s);
+//		primaryStage.show();
+//
+//=======
 				
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -107,7 +106,7 @@ public class GameTest extends Application {
 			}
 		});
 		
->>>>>>> refs/heads/ZachNEWBraanch
+
 		root.setOnMouseClicked(e -> {
 
 			shootBullet(e);
@@ -116,61 +115,23 @@ public class GameTest extends Application {
 
 		t.scheduleAtFixedRate(new TimerTask() {
 			@Override
-<<<<<<< HEAD
-			public void run() {	
-				update();
-=======
+//<<<<<<< HEAD
+//			public void run() {	
+//				update();
+//=======
 			public void run() {
 				
-				if(!isPaused)
-				{
+				if(!isPaused){
+					update();
+				}
 					
-				counter += 60;
-
-
-				// TODO: Ask professor if having a bunch of static call methods here is bad.
-
-				for (int i = 0; i < bullets.size(); ++i) {
-					bullets.get(i).setSpeedCoeficient(2.3);
-					bullets.get(i).move();
-
-					if (bullets.get(i).isOutOfBounds()) {
-						Bullet bullet = bullets.get(i);
-						Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), bullet.getIv()));
-						bullets.remove(i);
-					}
-				}
 				
-				if (counter > delay) {
-					counter = 0;
-					Platform.runLater(() -> manager.spawn(enemies));
-				}
 
-				for (int i = 0; i < enemies.size(); ++i) {
-
-					enemies.get(i).move();
-
-					if (enemies.get(i).isOutOfBounds()) {
-						Enemy enemy = enemies.get(i);
-						Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
-						enemies.remove(i);
-					}
-				}
-
-				Physics.collision(bullets, enemies, root);
-
-				Physics.playerCollision(enemies, root, p);
-				p.injure();
-				root.getChildren().addAll(healthNode);
->>>>>>> refs/heads/ZachNEWBraanch
-			}
-
-<<<<<<< HEAD
-		}, 500, 60);
-=======
+//<<<<<<< HEAD
+//		}, 500, 60);
+//=======
 			}}, 500, 60);
 		
->>>>>>> refs/heads/ZachNEWBraanch
 		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -227,7 +188,7 @@ public class GameTest extends Application {
 		}
 
 		Physics.collision(bullets, enemies, root);
-
+		p.injure();
 		Physics.playerCollision(enemies, root, p);
 	}
 

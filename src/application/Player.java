@@ -7,7 +7,7 @@ public class Player extends GameObject {
 
 	private boolean alive;
 	private int lives;
- 	private Image img= new Image("ufo.png",100,100,true,true);
+ 	private Image img= new Image("ufo.png");
  	private ImageView imgv;
 
 	public Player(double x, double y, double radius) {
@@ -18,8 +18,8 @@ public class Player extends GameObject {
 		imgv = new ImageView();
 		imgv.setImage(img);
 		
-		imgv.setX(x);
-		imgv.setY(y);
+		imgv.setX(x-125);
+		imgv.setY(y-125);
 	}
 
 	public Player() {
