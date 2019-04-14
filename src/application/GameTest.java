@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,11 +28,16 @@ public class GameTest extends Application {
 	ArrayList<Enemy> enemies = new ArrayList<>();
 	double counter = 0;
 	protected Player p;
+<<<<<<< HEAD
 	private int windowSizeX = 1920;
 	private int windowSizeY = 980;
 	
 	Pane root;
 	SpawnManager manager;
+=======
+	protected boolean isPaused =true;
+
+>>>>>>> refs/heads/ZachNEWBraanch
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -39,23 +46,68 @@ public class GameTest extends Application {
 
 
 		Timer t = new Timer();
+<<<<<<< HEAD
 
 		root = new Pane();
 
 		p = new Player(windowSizeX / 2, windowSizeY / 2, 30);
+=======
+		Pane root = new Pane();
+		
+
+		p = new Player(centerX, centerY, 30, "ufo.png");
+		
+		//creates new StartMenu
+		StartMenu start = new StartMenu(windowSizeX, windowSizeY,"space.png","title.png");
+		
+		//sets background image to be space
+		start.getPane().setBackground(start.getBG());
+		
+		
+		start.getPane().getChildren().addAll(start.getButton(), start.getTitlePic());
+		
+		primaryStage.setTitle(start.getTitle());
+		primaryStage.setScene(start.getScene());
+		primaryStage.show();
+		
+>>>>>>> refs/heads/ZachNEWBraanch
 		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
+<<<<<<< HEAD
 		root.getChildren().addAll(p.getGraphic(), healthNode);
+=======
+		healthNode.setFill(Color.rgb(255, 255, 255));
+		
+		p.getNode().setX(centerX - 125);
+		p.getNode().setY(centerY - 125);
+		
+		root.setBackground(start.getBG());
+		root.getChildren().addAll(p.getGraphic(), p.getNode(),healthNode);
+>>>>>>> refs/heads/ZachNEWBraanch
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
+<<<<<<< HEAD
 
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(s);
 		primaryStage.show();
 
+=======
+				
+		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				isPaused = false;
+				primaryStage.setTitle("Game");
+				primaryStage.setScene(s);
+				primaryStage.show();
+			}
+		});
+		
+>>>>>>> refs/heads/ZachNEWBraanch
 		root.setOnMouseClicked(e -> {
 
 			shootBullet(e);
@@ -64,11 +116,61 @@ public class GameTest extends Application {
 
 		t.scheduleAtFixedRate(new TimerTask() {
 			@Override
+<<<<<<< HEAD
 			public void run() {	
 				update();
+=======
+			public void run() {
+				
+				if(!isPaused)
+				{
+					
+				counter += 60;
+
+
+				// TODO: Ask professor if having a bunch of static call methods here is bad.
+
+				for (int i = 0; i < bullets.size(); ++i) {
+					bullets.get(i).setSpeedCoeficient(2.3);
+					bullets.get(i).move();
+
+					if (bullets.get(i).isOutOfBounds()) {
+						Bullet bullet = bullets.get(i);
+						Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), bullet.getIv()));
+						bullets.remove(i);
+					}
+				}
+				
+				if (counter > delay) {
+					counter = 0;
+					Platform.runLater(() -> manager.spawn(enemies));
+				}
+
+				for (int i = 0; i < enemies.size(); ++i) {
+
+					enemies.get(i).move();
+
+					if (enemies.get(i).isOutOfBounds()) {
+						Enemy enemy = enemies.get(i);
+						Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
+						enemies.remove(i);
+					}
+				}
+
+				Physics.collision(bullets, enemies, root);
+
+				Physics.playerCollision(enemies, root, p);
+				p.injure();
+				root.getChildren().addAll(healthNode);
+>>>>>>> refs/heads/ZachNEWBraanch
 			}
 
+<<<<<<< HEAD
 		}, 500, 60);
+=======
+			}}, 500, 60);
+		
+>>>>>>> refs/heads/ZachNEWBraanch
 		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
