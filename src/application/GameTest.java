@@ -38,6 +38,7 @@ public class GameTest extends Application {
 	Pane root;
 	SpawnManager manager;
 	protected boolean isPaused = true;
+	private Text healthNode;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -60,17 +61,23 @@ public class GameTest extends Application {
 		primaryStage.setScene(start.getScene());
 		primaryStage.show();
 
-		Text healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
+		this.healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(20));
 		healthNode.setFill(Color.rgb(255, 255, 255));
+		
+		Text score = new Text(1500, windowSizeY - 100, "Score: " + Integer.toString(p.getScore()));
+		score.setFont(new Font(20));
+		score.setFill(Color.rgb(255, 255, 255));
 
 		root.setBackground(start.getBG());
-		root.getChildren().addAll(p.getGraphic(), p.getNode(), healthNode);
+		root.getChildren().addAll(p.getGraphic(), p.getNode(), healthNode, score);
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
 
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
+		
+		
 
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -161,12 +168,13 @@ public class GameTest extends Application {
 				Enemy enemy = enemies.get(i);
 				System.out.print("Enemy out of bounds");
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(),enemy.getIv()));
-				enemies.remove(i);
+				//enemies.remove(i);
 			}
 		}
 
-		Physics.collision(bullets, enemies, root);
+		Physics.collision(bullets, enemies, root,p,healthNode);
 		Physics.playerCollision(enemies, root, p);
+		
 		
 	}
 

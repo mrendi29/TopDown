@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public abstract class Physics {
 	/**
@@ -14,7 +17,7 @@ public abstract class Physics {
 	 * @param enemies
 	 * @param root
 	 */
-	public static void collision(ArrayList<Bullet> bullets, ArrayList<Enemy> enemies, Pane root) {
+	public static void collision(ArrayList<Bullet> bullets, ArrayList<Enemy> enemies, Pane root, Player p, Text healthNode) {
 
 		for (int i = 0; i < bullets.size(); ++i) {
 			for (int j = 0; j < enemies.size(); ++j) {
@@ -24,10 +27,18 @@ public abstract class Physics {
 					Enemy enemy = enemies.get(j);
 					bullet.setAlive(false);
 					enemy.setAlive(false);
+					p.score();
+					if(p.getScore() % 10 == 0)
+					{
+						p.levelUp();
+					}
+					System.out.println(p.getScore());
 					// TODO: FIX RENDER PROBLEMS.
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
 					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
 					Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
+					
+					
 				}
 			}
 		}
@@ -55,8 +66,8 @@ public abstract class Physics {
 			if (enemies.get(i).isCollision(player)) {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
-				System.out.println("Player hitted");
-				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic()));
+				System.out.println("Player hit");
+				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));
 				Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
 
 			}

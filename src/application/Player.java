@@ -2,6 +2,8 @@ package application;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class Player extends GameObject {
 
@@ -9,12 +11,16 @@ public class Player extends GameObject {
 	private int lives;
 	private Image img = new Image("ufo.png");
 	private ImageView imgv;
+	private int score;
+	private int level;
 
 	public Player(double x, double y, double radius) {
 		super(x, y, radius);
 
 		alive = true;
 		lives = 3;
+		score = 0;
+		level = 0;
 		imgv = new ImageView();
 		imgv.setImage(img);
 
@@ -25,15 +31,29 @@ public class Player extends GameObject {
 	public Player() {
 		this(200, 200, 20);
 	}
-
-	public boolean injure() {
-		lives--;
-		if (lives == 0) {
+	public void levelUp()
+	{
+		level++;
+	}
+	public int getLevel()
+	{
+		return level;
+	}
+	public int injure(Text lives, Pane root) {
+		this.lives--;
+		if (this.lives == 0) {
 			alive = false;
 		}
-		return alive;
+		return this.lives;
 	}
-
+	public int getScore()
+	{
+		return score;
+	}
+	public void score()
+	{
+		score++;
+	}
 	public int getLives() {
 		return lives;
 	}
