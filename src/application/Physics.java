@@ -53,7 +53,6 @@ public abstract class Physics {
 	public static void playerCollision(ArrayList<Enemy> enemies, Pane root, Player player) {
 		for (int i = 0; i < enemies.size(); ++i) {
 			if (enemies.get(i).isCollision(player)) {
-				System.out.println("Enemy hitted player");
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
 				System.out.println("Player hitted");
@@ -62,6 +61,7 @@ public abstract class Physics {
 
 			}
 		}
+		
 		enemies.removeIf(GameObject::isDead);
 		enemies.forEach(GameObject::move);
 	}

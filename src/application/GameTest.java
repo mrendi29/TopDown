@@ -7,6 +7,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 public class GameTest extends Application {
 
@@ -83,24 +87,33 @@ public class GameTest extends Application {
 			shootBullet(e);
 
 		});
-
-		t.scheduleAtFixedRate(new TimerTask() {
-
-			@Override
-			public void run() {
-
-				if (!isPaused) {
-					update();
-				}
-
+		
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(60), ev->  {
+			if (!isPaused) {
+				update();
 			}
-		}, 500, 60);
-
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+		
+//		t.scheduleAtFixedRate(new TimerTask() {
+//
+//			@Override
+//			public void run() {
+//
+//				if (!isPaused) {
+//					update();
+//				}
+//
+//			}
+//		}, 500, 60);
+		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent arg0) {
-				t.cancel();
+//				t.cancel();
+				timeline.stop();
 			}
 		});
 		root.requestFocus();
@@ -110,7 +123,7 @@ public class GameTest extends Application {
 		double xPosition = e.getSceneX();
 		double yPosition = e.getSceneY();
 
-		Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 13, xPosition, yPosition);
+		Bullet bullet = new Bullet(windowSizeX / 2, windowSizeY / 2, 18, xPosition, yPosition);
 		bullets.add(bullet);
 
 		root.getChildren().addAll(bullet.getGraphic(), bullet.getIv());
@@ -139,9 +152,9 @@ public class GameTest extends Application {
 			counter = 0;
 			Platform.runLater(() -> manager.spawn(enemies));
 		}
-
+		
 		for (int i = 0; i < enemies.size(); ++i) {
-
+			
 			enemies.get(i).move();
 
 			if (enemies.get(i).isOutOfBounds()) {
@@ -154,6 +167,7 @@ public class GameTest extends Application {
 
 		Physics.collision(bullets, enemies, root);
 		Physics.playerCollision(enemies, root, p);
+		
 	}
 
 }
