@@ -80,7 +80,6 @@ public class GameObject {
 	}
 
 	public boolean isCollision(GameObject o2) {
-		System.out.println("Collision happened between " + this.toString() + " --- " + o2.toString());
 		return this.getGraphic().getBoundsInParent().intersects(o2.getGraphic().getBoundsInParent());
 
 	}
