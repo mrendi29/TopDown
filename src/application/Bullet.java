@@ -47,6 +47,10 @@ public class Bullet extends GameObject {
 		}
 	}
 
+	@Override
+	public  String toString() {
+		return "Bullet";
+	} 
 	public ImageView getIv() {
 		return imView;
 	}

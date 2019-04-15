@@ -42,4 +42,8 @@ public class Player extends GameObject {
 		return imgv;
 	}
 
+	@Override
+	public  String toString() {
+		return "Player";
+	}
 }

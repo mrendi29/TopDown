@@ -1,8 +1,8 @@
 package application;
-
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 
 /**
@@ -64,7 +64,7 @@ public class SpawnManager {
 	private void spawnBottom(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
 			double x = (random.nextInt(1800) % windowSizeX);
-			Enemy enemy = new Enemy(x, windowSizeY + 1, radius, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(x, windowSizeY + 2, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
 	}
@@ -72,7 +72,7 @@ public class SpawnManager {
 	private void spawnRight(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
 			double y = (random.nextInt(1800) % windowSizeY);
-			Enemy enemy = new Enemy(windowSizeX + 1, y, radius, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(windowSizeX+2, y, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
 
@@ -81,7 +81,7 @@ public class SpawnManager {
 	private void spawnTop(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
 			double y = (random.nextInt(1800) % windowSizeX);
-			Enemy enemy = new Enemy(y, 1, radius, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(y, -2, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
 	}
@@ -89,7 +89,7 @@ public class SpawnManager {
 	private void spawnLeft(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < 2; ++j) {
 			double x = (random.nextInt(2000) % windowSizeY);
-			Enemy enemy = new Enemy(0, x, radius, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(-2, x, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
 	}

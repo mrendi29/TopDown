@@ -146,13 +146,13 @@ public class GameTest extends Application {
 
 			if (enemies.get(i).isOutOfBounds()) {
 				Enemy enemy = enemies.get(i);
-				Platform.runLater(() -> root.getChildren().remove(enemy.getGraphic()));
+				System.out.print("Enemy out of bounds");
+				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(),enemy.getIv()));
 				enemies.remove(i);
 			}
 		}
 
 		Physics.collision(bullets, enemies, root);
-		p.injure();
 		Physics.playerCollision(enemies, root, p);
 	}
 

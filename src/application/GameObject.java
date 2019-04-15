@@ -74,11 +74,13 @@ public class GameObject {
 	}
 
 	public void createRandomSpeed() {
-		double coef = Math.abs((random.nextDouble()) + 0.3) - 0.2;
-		setSpeedCoeficient(coef);
+		int coef = random.nextInt(4);
+		double speed= coef/13.0;
+		setSpeedCoeficient(speed);
 	}
 
 	public boolean isCollision(GameObject o2) {
+		System.out.println("Collision happened between " + this.toString() + " --- " + o2.toString());
 		return this.getGraphic().getBoundsInParent().intersects(o2.getGraphic().getBoundsInParent());
 
 	}

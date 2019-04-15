@@ -40,7 +40,11 @@ public class Enemy extends GameObject {
 		getIv().setY(y - 40);
 
 	}
-
+	
+	@Override
+	public  String toString() {
+		return "Enemy";
+	}
 	public double angleOfRotation() {
 		double rotationAngle = Math.toDegrees(Math.atan((super.getVy() / super.getVx())));
 
