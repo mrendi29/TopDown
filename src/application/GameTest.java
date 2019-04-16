@@ -40,6 +40,11 @@ public class GameTest extends Application {
 	protected boolean isPaused = true;
 	private Text healthNode;
 	private Text score;
+	private Timeline timeline;
+
+	public GameTest() {
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -64,20 +69,18 @@ public class GameTest extends Application {
 		healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
 		healthNode.setFont(new Font(28));
 		healthNode.setFill(Color.rgb(255, 255, 255));
-		
+
 		score = new Text(1500, windowSizeY - 100, "Score: " + Integer.toString(p.getScore()));
 		score.setFont(new Font(28));
 		score.setFill(Color.rgb(255, 255, 255));
-		
+
 		root.setBackground(start.getBG());
 		root.getChildren().addAll(p.getGraphic(), p.getNode(), healthNode, score);
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
-	
+
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
-		
-		
 
 		start.getButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -94,15 +97,15 @@ public class GameTest extends Application {
 			shootBullet(e);
 
 		});
-		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(60), ev->  {
+
+		timeline = new Timeline(new KeyFrame(Duration.millis(60), ev -> {
 			if (!isPaused) {
 				update();
 			}
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
-		
+
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
@@ -110,7 +113,7 @@ public class GameTest extends Application {
 				timeline.stop();
 			}
 		});
-		
+
 		root.requestFocus();
 	}
 
@@ -128,19 +131,17 @@ public class GameTest extends Application {
 
 	protected void update() {
 		counter += 60;
-			
+
 		// TODO: Ask professor if having a bunch of static call methods here is bad.
 
-		// TODO: Ask professor how to resolve java thread bug.
-		
 		score.setText(String.format("Score: %d", p.getScore()));
 		healthNode.setText(String.format("Lives: %d", p.getLives()));
-		if(p.getLives() <= 0)
-		{
+
+		if (p.getLives() <= 0) {
+			timeline.stop();
 			System.exit(0);
 		}
-		
-		
+
 		for (int i = 0; i < bullets.size(); ++i) {
 			bullets.get(i).setSpeedCoeficient(2.3);
 			bullets.get(i).move();
@@ -156,22 +157,20 @@ public class GameTest extends Application {
 			counter = 0;
 			Platform.runLater(() -> manager.spawn(enemies));
 		}
-		
+
 		for (int i = 0; i < enemies.size(); ++i) {
-			
+
 			enemies.get(i).move();
 
 			if (enemies.get(i).isOutOfBounds()) {
 				Enemy enemy = enemies.get(i);
-				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(),enemy.getIv()));
+				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));
 				enemies.remove(i);
 			}
 		}
 
-		Physics.collision(bullets, enemies, root,p,healthNode);
+		Physics.collision(bullets, enemies, root, p);
 		Physics.playerCollision(enemies, root, p);
-		
-		
 	}
 
 }

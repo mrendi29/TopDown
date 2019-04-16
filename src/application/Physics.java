@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public abstract class Physics {
-	static SpawnManager manager= SpawnManager.createInstance();
+	static SpawnManager manager = SpawnManager.createInstance();
 
 	/**
 	 * Method responsible for checking if bullets collide with enemies. If collision
@@ -19,8 +19,8 @@ public abstract class Physics {
 	 * @param enemies
 	 * @param root
 	 */
-	public static void collision(ArrayList<Bullet> bullets, ArrayList<Enemy> enemies, Pane root, Player p, Text healthNode) {
-			
+	public static void collision(ArrayList<Bullet> bullets, ArrayList<Enemy> enemies, Pane root, Player p) {
+
 		for (int i = 0; i < bullets.size(); ++i) {
 			for (int j = 0; j < enemies.size(); ++j) {
 
@@ -30,18 +30,14 @@ public abstract class Physics {
 					bullet.setAlive(false);
 					enemy.setAlive(false);
 					p.score();
-					if(p.getScore() % 20 == 0)
-					{
+					if (p.getScore() % 20 == 0) {
 						p.levelUp();
 						manager.setLevel(p.getLevel());
 					}
-					//System.out.println(p.getScore());
-					// TODO: FIX RENDER PROBLEMS.
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
 					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
 					Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
-					
-					
+
 				}
 			}
 		}
@@ -51,10 +47,10 @@ public abstract class Physics {
 		// list.
 		bullets.removeIf(GameObject::isDead);
 		enemies.removeIf(GameObject::isDead);
-		
+
 		// Update Each Bullet and Enemy.
 		bullets.forEach(GameObject::move);
-		enemies.forEach(GameObject::move);	
+		enemies.forEach(GameObject::move);
 	}
 
 	/**
@@ -69,16 +65,16 @@ public abstract class Physics {
 			if (enemies.get(i).isCollision(player)) {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
-				
-			//	System.out.println("Player hit" + player.getLives());
+
+				// System.out.println("Player hit" + player.getLives());
 				Platform.runLater(() -> player.injure());
-				
+
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));
 				Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
 
 			}
 		}
-		
+
 		enemies.removeIf(GameObject::isDead);
 		enemies.forEach(GameObject::move);
 	}

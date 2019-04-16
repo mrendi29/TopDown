@@ -39,7 +39,6 @@ public class GameObject {
 		this.y = y;
 		this.radius = radius;
 		node = new Circle(x, y, radius);
-		
 
 	}
 
@@ -76,7 +75,7 @@ public class GameObject {
 
 	public void createRandomSpeed() {
 		int coef = random.nextInt(4) + 1;
-		double speed= coef/13.0;
+		double speed = coef / 13.0;
 		setSpeedCoeficient(speed);
 	}
 

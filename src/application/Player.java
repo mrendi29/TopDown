@@ -31,14 +31,15 @@ public class Player extends GameObject {
 	public Player() {
 		this(200, 200, 20);
 	}
-	public void levelUp()
-	{
+
+	public void levelUp() {
 		level++;
 	}
-	public  int getLevel()
-	{
+
+	public int getLevel() {
 		return level;
 	}
+
 	public int injure() {
 		this.lives--;
 		if (this.lives == 0) {
@@ -46,14 +47,15 @@ public class Player extends GameObject {
 		}
 		return this.lives;
 	}
-	public int getScore()
-	{
+
+	public int getScore() {
 		return score;
 	}
-	public void score()
-	{
+
+	public void score() {
 		score++;
 	}
+
 	public int getLives() {
 		return lives;
 	}
@@ -63,7 +65,7 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public  String toString() {
+	public String toString() {
 		return "Player";
 	}
 }

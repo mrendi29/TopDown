@@ -1,4 +1,5 @@
 package application;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,13 +24,12 @@ public class SpawnManager {
 	private static SpawnManager _manager = null;
 	private int radius = 30;
 	private int level = 1;
-	
-	
+
 	public int getLevel() {
 		return level;
 	}
 
-	public  void setLevel(int level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 
@@ -82,7 +82,7 @@ public class SpawnManager {
 	private void spawnRight(ArrayList<Enemy> enemyList) {
 		for (int j = 0; j < level; ++j) {
 			double y = (random.nextInt(1800) % windowSizeY);
-			Enemy enemy = new Enemy(windowSizeX+4, y, radius, windowSizeX / 2, windowSizeY / 2);
+			Enemy enemy = new Enemy(windowSizeX + 4, y, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
 		}
 

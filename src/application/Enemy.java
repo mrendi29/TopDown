@@ -29,7 +29,7 @@ public class Enemy extends GameObject {
 
 		double x = getX() + getSpeedCoeficient() / 2 * getVx() * getDt();
 		double y = getY() + getSpeedCoeficient() / 2 * getVy() * getDt();
-		
+
 		super.setX(x);
 		super.setY(y);
 
@@ -40,11 +40,12 @@ public class Enemy extends GameObject {
 		getIv().setY(y - 40);
 
 	}
-	
+
 	@Override
-	public  String toString() {
+	public String toString() {
 		return "Enemy";
 	}
+
 	public double angleOfRotation() {
 		double rotationAngle = Math.toDegrees(Math.atan((super.getVy() / super.getVx())));
 
