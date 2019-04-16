@@ -66,7 +66,10 @@ public abstract class Physics {
 			if (enemies.get(i).isCollision(player)) {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
-				System.out.println("Player hit");
+				
+				System.out.println("Player hit" + player.getLives());
+				Platform.runLater(() -> player.injure());
+				
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));
 				Platform.runLater(() -> root.getChildren().remove(enemy.getIv()));
 

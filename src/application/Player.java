@@ -39,7 +39,7 @@ public class Player extends GameObject {
 	{
 		return level;
 	}
-	public int injure(Text lives, Pane root) {
+	public int injure() {
 		this.lives--;
 		if (this.lives == 0) {
 			alive = false;

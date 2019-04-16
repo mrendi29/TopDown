@@ -30,10 +30,6 @@ public class Enemy extends GameObject {
 		double x = getX() + getSpeedCoeficient() / 2 * getVx() * getDt();
 		double y = getY() + getSpeedCoeficient() / 2 * getVy() * getDt();
 		
-		if(getSpeedCoeficient()/2 == 0)
-		{
-			System.out.println("bug here");
-		}
 		super.setX(x);
 		super.setY(y);
 

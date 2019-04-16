@@ -124,6 +124,9 @@ public class GameTest extends Application {
 			}
 		});
 		root.requestFocus();
+		
+		
+		
 	}
 
 	private void shootBullet(MouseEvent e) {
@@ -144,6 +147,11 @@ public class GameTest extends Application {
 		// TODO: Ask professor if having a bunch of static call methods here is bad.
 
 		// TODO: Ask professor how to resolve java thread bug.
+		
+		if(p.getLives() <= 0)
+		{
+			System.exit(0);
+		}
 		for (int i = 0; i < bullets.size(); ++i) {
 			bullets.get(i).setSpeedCoeficient(2.3);
 			bullets.get(i).move();
