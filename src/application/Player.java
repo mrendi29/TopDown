@@ -20,7 +20,7 @@ public class Player extends GameObject {
 		alive = true;
 		lives = 3;
 		score = 0;
-		level = 0;
+		level = 1;
 		imgv = new ImageView();
 		imgv.setImage(img);
 
@@ -35,7 +35,7 @@ public class Player extends GameObject {
 	{
 		level++;
 	}
-	public int getLevel()
+	public  int getLevel()
 	{
 		return level;
 	}

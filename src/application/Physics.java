@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public abstract class Physics {
+	static SpawnManager manager= SpawnManager.createInstance();
+
 	/**
 	 * Method responsible for checking if bullets collide with enemies. If collision
 	 * happens then remove both bullet and enemy from screen.
@@ -18,7 +20,7 @@ public abstract class Physics {
 	 * @param root
 	 */
 	public static void collision(ArrayList<Bullet> bullets, ArrayList<Enemy> enemies, Pane root, Player p, Text healthNode) {
-
+			
 		for (int i = 0; i < bullets.size(); ++i) {
 			for (int j = 0; j < enemies.size(); ++j) {
 
@@ -28,11 +30,12 @@ public abstract class Physics {
 					bullet.setAlive(false);
 					enemy.setAlive(false);
 					p.score();
-					if(p.getScore() % 10 == 0)
+					if(p.getScore() % 20 == 0)
 					{
 						p.levelUp();
+						manager.setLevel(p.getLevel());
 					}
-					System.out.println(p.getScore());
+					//System.out.println(p.getScore());
 					// TODO: FIX RENDER PROBLEMS.
 					Platform.runLater(() -> root.getChildren().removeAll(bullet.getGraphic(), enemy.getGraphic()));
 					Platform.runLater(() -> root.getChildren().remove(bullet.getIv()));
@@ -67,7 +70,7 @@ public abstract class Physics {
 				Enemy enemy = enemies.get(i);
 				enemy.setAlive(false);
 				
-				System.out.println("Player hit" + player.getLives());
+			//	System.out.println("Player hit" + player.getLives());
 				Platform.runLater(() -> player.injure());
 				
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(), enemy.getIv()));

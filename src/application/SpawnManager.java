@@ -22,6 +22,16 @@ public class SpawnManager {
 	private int windowSizeY;
 	private static SpawnManager _manager = null;
 	private int radius = 30;
+	private int level = 1;
+	
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public  void setLevel(int level) {
+		this.level = level;
+	}
 
 	private SpawnManager() {
 	}
@@ -62,7 +72,7 @@ public class SpawnManager {
 
 	// TODO: FIX PROBLEM WITH RANDOM NUMBERS.
 	private void spawnBottom(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 2; ++j) {
+		for (int j = 0; j < level; ++j) {
 			double x = (random.nextInt(1800) % windowSizeX);
 			Enemy enemy = new Enemy(x, windowSizeY + 4, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
@@ -70,7 +80,7 @@ public class SpawnManager {
 	}
 
 	private void spawnRight(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 2; ++j) {
+		for (int j = 0; j < level; ++j) {
 			double y = (random.nextInt(1800) % windowSizeY);
 			Enemy enemy = new Enemy(windowSizeX+4, y, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
@@ -79,7 +89,7 @@ public class SpawnManager {
 	}
 
 	private void spawnTop(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 2; ++j) {
+		for (int j = 0; j < level; ++j) {
 			double y = (random.nextInt(1800) % windowSizeX);
 			Enemy enemy = new Enemy(y, -4, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);
@@ -87,7 +97,7 @@ public class SpawnManager {
 	}
 
 	private void spawnLeft(ArrayList<Enemy> enemyList) {
-		for (int j = 0; j < 2; ++j) {
+		for (int j = 0; j < level; ++j) {
 			double x = (random.nextInt(2000) % windowSizeY);
 			Enemy enemy = new Enemy(-4, x, radius, windowSizeX / 2, windowSizeY / 2);
 			attachEnemy(enemyList, enemy);

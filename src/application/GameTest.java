@@ -39,7 +39,7 @@ public class GameTest extends Application {
 	SpawnManager manager;
 	protected boolean isPaused = true;
 	private Text healthNode;
-
+	private Text score;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -61,20 +61,20 @@ public class GameTest extends Application {
 		primaryStage.setScene(start.getScene());
 		primaryStage.show();
 
-		this.healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
-		healthNode.setFont(new Font(20));
+		healthNode = new Text(50, windowSizeY - 100, "Lives: " + Integer.toString(p.getLives()));
+		healthNode.setFont(new Font(28));
 		healthNode.setFill(Color.rgb(255, 255, 255));
 		
-		Text score = new Text(1500, windowSizeY - 100, "Score: " + Integer.toString(p.getScore()));
-		score.setFont(new Font(20));
+		score = new Text(1500, windowSizeY - 100, "Score: " + Integer.toString(p.getScore()));
+		score.setFont(new Font(28));
 		score.setFill(Color.rgb(255, 255, 255));
-
+		
 		root.setBackground(start.getBG());
 		root.getChildren().addAll(p.getGraphic(), p.getNode(), healthNode, score);
 
 		manager = SpawnManager.createInstance();
 		manager.setVariables(root, windowSizeX, windowSizeY);
-
+	
 		Scene s = new Scene(root, windowSizeX, windowSizeY);
 		
 		
@@ -103,30 +103,15 @@ public class GameTest extends Application {
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
 		
-//		t.scheduleAtFixedRate(new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//
-//				if (!isPaused) {
-//					update();
-//				}
-//
-//			}
-//		}, 500, 60);
-		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent arg0) {
-//				t.cancel();
 				timeline.stop();
 			}
 		});
+		
 		root.requestFocus();
-		
-		
-		
 	}
 
 	private void shootBullet(MouseEvent e) {
@@ -143,15 +128,19 @@ public class GameTest extends Application {
 
 	protected void update() {
 		counter += 60;
-
+			
 		// TODO: Ask professor if having a bunch of static call methods here is bad.
 
 		// TODO: Ask professor how to resolve java thread bug.
 		
+		score.setText(String.format("Score: %d", p.getScore()));
+		healthNode.setText(String.format("Lives: %d", p.getLives()));
 		if(p.getLives() <= 0)
 		{
 			System.exit(0);
 		}
+		
+		
 		for (int i = 0; i < bullets.size(); ++i) {
 			bullets.get(i).setSpeedCoeficient(2.3);
 			bullets.get(i).move();
@@ -174,9 +163,8 @@ public class GameTest extends Application {
 
 			if (enemies.get(i).isOutOfBounds()) {
 				Enemy enemy = enemies.get(i);
-				System.out.print("Enemy out of bounds");
 				Platform.runLater(() -> root.getChildren().removeAll(enemy.getGraphic(),enemy.getIv()));
-				//enemies.remove(i);
+				enemies.remove(i);
 			}
 		}
 
