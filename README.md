@@ -11,9 +11,9 @@
 
 ### Features to be added:
 
-- [ ] GUI
-- [ ] Instructions Screen.
-- [ ] Main CleanUp
+- [x] GUI
+- [x] Instructions Screen.
+- [x] Main CleanUp
 
 ## Video Walkthrough
 
