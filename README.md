@@ -44,7 +44,7 @@ Here is a walkthrough of our progress.
 
 <img src='http://g.recordit.co/Sy0215pwHy.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-## First Steps:
+## First Steps of Implementation:
 <img src='http://g.recordit.co/5zfsdIXkmM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
