@@ -1,6 +1,6 @@
 # Top Down Shooter - Aliens vs Humans 
 
-## [Project Pitch with Slides](https://docs.google.com/presentation/d/1v3ea9qtfltWQ06R84yk-NwTmRux-YME8crWoAlW89lM/edit#slide=id.p)
+## [Project Pitch with Slides](https://docs.google.com/presentation/d/1v3ea9qtfltWQ06R84yk-NwTmRux-YME8crWoAlW89lM/edit?usp=sharing)
 
 ## Object: 
 Our goal was to create an Old-Fashion 2D shooter game that has an easy-to-operate GUI and competent interactive features between the user and the enemy. 
